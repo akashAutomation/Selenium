@@ -1,0 +1,6 @@
+<configuration>
+    <theme>dark</theme>
+    <documentTitle>Akash Automation Report</documentTitle>
+    <reportName>BDD Execution Summary</reportName>
+    <timelineEnabled>true</timelineEnabled>
+</configuration>
