@@ -1,0 +1,58 @@
+Selenium is a popular open-source framework used to automate web browsers for testing web applications
+across different platforms and browsers.
+
+🧪 What Selenium Does
+- Automates browser actions like clicking buttons, filling forms, navigating pages, and verifying content.
+- Used primarily for functional testing, regression testing, and cross-browser compatibility.
+- Supports multiple programming languages: Java, Python, JavaScript, C#, Ruby, and more.
+    - selenium-java for Java
+    - selenium-python for Python
+    - selenium-webdriver for JavaScript (Node.js)
+
+
+🧰 Selenium Tool Suite
+Selenium is not a single tool — it’s a suite of components:
+1. Selenium WebDriver --> Core API to automate browsers using code
+2. Selenium IDE --> Browser extension for record-and-playback testing
+3. Selenium Grid --> Runs tests in parallel across multiple machines/browsers
+4. Selenium RC (deprecated) --> Legacy tool replaced by WebDriver
+
+🌐 Browser & Platform Support
+- Works with Chrome, Firefox, Edge, Safari, etc.
+- Compatible with Windows, macOS, Linux
+- Can run tests locally or remotely (e.g., Selenium Grid, cloud services like BrowserStack)
+
+✅ Why Use Selenium?
+- Free and open-source
+- Language flexibility (Java, Python, etc.)
+- Cross-browser testing
+- CI/CD integration (Jenkins, GitHub Actions)
+- Scalable with frameworks like TestNG, JUnit, Cucumber
+
+⚠️ Limitations
+- Only automates web applications (not desktop or mobile apps natively)
+- Requires programming knowledge
+- No built-in reporting — needs integration with tools like ExtentReports or Allure
+
+🔁 Selenium WebDriver Workflow
+Here’s how a typical Selenium WebDriver test executes:
+1. Test Script Execution
+    - You write a test using Selenium APIs in your preferred language.
+    - Example: driver.findElement(By.id("login")).click();
+2. Command Translation
+    - The Selenium binding converts your command into a JSON payload.
+3. Protocol Communication
+    - This payload is sent via HTTP to the browser driver (e.g., chromedriver.exe).
+4. Driver Interpretation
+    - The browser driver receives the command and translates it into native browser instructions using
+      the browser’s automation engine (e.g., Chrome DevTools Protocol).
+5. Browser Action
+    - The browser performs the requested action (e.g., clicking a button, navigating to a URL).
+6. Response Handling
+    - The browser driver sends a response back to the client (e.g., success, failure, element not found).
+7. Result Processing
+    - Your test script processes the result and continues with the next command.
+
+Page Object Model (POM):
+The Page Object Model (POM) is a design pattern in Selenium test automation that promotes modularity,
+maintainability, and reusability by separating the page structure (UI elements) from the test logic.

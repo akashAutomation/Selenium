@@ -1,0 +1,48 @@
+- Cucumber is a Behavior-Driven Development (BDD) testing framework that allows you to write test cases in
+  plain English using a language called Gherkin. It bridges the gap between technical and non-technical
+  stakeholders by making test scenarios readable and understandable by everyone involved in the development process.
+
+- Cucumber keywords:
+| Keyword           | Purpose                                                                 | Example Usage                                      |
+|-------------------|-------------------------------------------------------------------------|----------------------------------------------------|
+| Feature           | Describes the high-level functionality being tested                     | Feature: User login functionality                  |
+| Scenario          | Defines a specific test case or user behavior                           | Scenario: Successful login with valid credentials  |
+| Given             | Sets up initial context or preconditions                                | Given the user is on the login page                |
+| When              | Describes the action or event                                           | When the user enters valid credentials             |
+| Then              | Specifies the expected outcome                                          | Then the user should be redirected to dashboard    |
+| And               | Adds additional steps to Given, When, or Then                           | And the user clicks the login button               |
+| But               | Adds a negative or contrasting step                                     | But the password field is empty                    |
+| Background        | Defines common steps that run before each scenario in the feature       | Background: Given the user is logged in            |
+| Scenario Outline  | Enables parameterized scenarios with examples                           | Scenario Outline: Login with <username>            |
+| Examples          | Provides data table for Scenario Outline placeholders                   | | username | password |                            |
+| Rule              | Groups related scenarios under a business rule (optional, advanced)     | Rule: Password must be at least 8 characters       |
+| #                 | Comment line (ignored by Cucumber)                                      | # This scenario tests login failure                |
+
+Cucumber hooks:
+- Cucumber hooks are special blocks of code that run before or after scenarios, steps, or features to manage setup,
+  teardown, logging, and more. They help reduce code duplication and centralize test lifecycle logic.
+
+| Hook Type             | Annotation       | When It Runs                                | Use Case Example                                      |
+|-----------------------|------------------|----------------------------------------------|--------------------------------------------------------|
+| Before                | @Before          | Before each scenario                         | Launch browser, initialize WebDriver, set test data    |
+| After                 | @After           | After each scenario                          | Quit browser, capture screenshot on failure            |
+| BeforeStep            | @BeforeStep      | Before each step in a scenario               | Log step start, set up preconditions                   |
+| AfterStep             | @AfterStep       | After each step in a scenario                | Log step result, capture screenshot on failure         |
+| BeforeAll (Java 8+)   | @BeforeAll       | Once before all scenarios (static method)    | Global setup like DB connection or config loading      |
+| AfterAll (Java 8+)    | @AfterAll        | Once after all scenarios (static method)     | Global teardown like closing DB or flushing reports    |
+
+
+| Exception Type                     | Description                                                                 | Typical Cause                                           |
+|-----------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------|
+| UndefinedStepException            | Step in feature file has no matching definition                            | Missing or misnamed step definition                     |
+| AmbiguousStepException            | Multiple step definitions match a single step                              | Overlapping regex or duplicate step definitions         |
+| CucumberException                 | Generic Cucumber error                                                      | Misconfigured runner, glue paths, or feature files      |
+| MissingStepDefinitionException    | Step definition not found during dry run                                   | Step not implemented or glue path incorrect             |
+| DuplicateStepDefinitionException  | Same step defined more than once                                            | Copy-paste errors or overlapping regex                  |
+| TestCaseFailedException           | Step or hook throws an exception during execution                          | Assertion failure, runtime error, or unhandled exception|
+| HookExecutionException            | Error in @Before, @After, or @BeforeStep hook                              | Faulty setup/teardown logic                             |
+| PendingException                  | Step marked as pending (e.g., throw new PendingException())                | Placeholder for unimplemented step                      |
+
+Tags
+- Enables selective execution (@smoke, @regression, @ignore).
+- Supports logical filtering (@login and not @slow).

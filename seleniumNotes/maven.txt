@@ -1,0 +1,36 @@
+- Maven is a powerful build automation and project management tool for Java-based applications. It simplifies
+  compiling, testing, packaging, and managing dependencies using a standardized approach.
+
+Maven is an open-source tool developed by the Apache Software Foundation. It uses an XML file called pom.xml (Project Object Model) to manage:
+- Project structure
+- Dependencies
+- Build lifecycle
+- Plugins and goals
+- Reporting and documentation
+Instead of writing custom build scripts (like in Ant), Maven follows a convention-over-configuration philosophy, reducing boilerplate and setup time.
+Sources: GeeksforGeeks, Apache Maven, BrowserStack
+
+🔧 Key Features of Maven
+| Feature                  | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| Dependency Management    | Automatically downloads and manages external libraries from Maven Central   |
+| Standard Directory Layout| Uses a fixed structure (src/main/java, src/test/java, etc.)                 |
+| Build Lifecycle          | Defines phases like compile, test, package, install, deploy                 |
+| Plugins                  | Extensible via plugins for testing, reporting, deployment, etc.             |
+| POM File                 | Central configuration file (pom.xml) for the entire project                 |
+| Multi-module Support     | Manages parent-child projects in a single build                             |
+| IDE Integration          | Works seamlessly with IntelliJ, Eclipse, VS Code                            |
+
+🚀 Maven Lifecycle Phase
+| Phase     | Purpose                          |
+|-----------|----------------------------------|
+| validate  | Check project structure          |
+| compile   | Compile source code              |
+| test      | Run unit tests                   |
+| package   | Bundle into JAR/WAR              |
+| install   | Install to local repository      |
+| deploy    | Push to remote repository        |
+
+
+
+

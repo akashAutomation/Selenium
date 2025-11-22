@@ -1,0 +1,8 @@
+- driver.close() --> Closes the current tab
+- driver.quit() --> Closes all browser windows and ends the WebDriver session
+- driver.getWindowHandle() --> Returns a String ID representing the current window that WebDriver is focused on
+- driver.getWindowHandles() --> Returns a Set of String IDs for all open windows/tabs.
+- driver.switchTo().newWindow(WindowType.TAB) --> opens a new tab in current focused window
+- driver.switchTo().newWindow(WindowType.WINDOW) --> opens a new window
+- driver.switchTo().alert() --> switch to alerts
+

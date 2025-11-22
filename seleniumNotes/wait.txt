@@ -1,0 +1,68 @@
+Selenium provides three main types of waits: Implicit Wait, Explicit Wait, and Fluent Wait.
+Each serves a different purpose for handling dynamic web elements and synchronization issues during test execution.
+
+1. Implicit Wait
+- What It Is:
+    - Sets a default wait time for the WebDriver to poll the DOM when trying to find an element.
+    - Syntax (Java): driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+- Use Case:
+    - Apply a global wait for all element lookups.
+    - Useful when elements take a consistent time to appear.
+    - Set once per session.
+- Limitations:
+    - Applies only to findElement and findElements.
+    - Can cause unpredictable behavior when mixed with explicit waits.
+
+2. Explicit Wait
+- What It Is:
+    - Waits for a specific condition to occur before proceeding (e.g., element to be clickable, visible, etc.).
+    - Syntax (Java):
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
+
+- Use Case:
+    - When you need to wait for specific elements or conditions.
+    - Ideal for dynamic content (e.g., AJAX-loaded elements).
+    - More precise and controlled than implicit wait.
+- Limitations:
+    - Needs to be applied per element or condition.
+    - Can be verbose if used repeatedly.
+
+- Methods:
+    elementToBeClickable(By locator) --> Waits until the element is visible and enabled for clicking
+    elementToBeSelected(By locator) --> Waits until the element is selected
+    invisibilityOfElementLocated(By locator) --> Waits until the element is not visible or not present in the DOM
+    visibilityOfElementLocated(By locator) --> Waits until the element located by the selector is visible
+    textToBe(By locator, String value) -->  Waits until the element’s text matches the given string
+    textToBePresentInElementLocated(By locator, String text) --> Waits until the element contains the given text
+    attributeToBe(By locator, String attribute, String value) --> Waits until the attribute equals the expected value
+    alertIsPresent() --> Waits until a JavaScript alert is present
+    frameToBeAvailableAndSwitchToIt(By locator)  --> Waits for a frame to be available and switches to it
+    titleIs(String title) --> Waits until the page title matches exactly
+    urlToBe(String url) --> Waits until the current URL matches exactly
+
+
+
+
+3. Fluent Wait
+- What It Is:
+    - An advanced form of explicit wait that allows:
+        - Custom polling intervals
+        - Exception handling
+        - Custom conditions
+    - Syntax (Java):
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+            .withTimeout(Duration.ofSeconds(15))
+            .pollingEvery(Duration.ofMillis(500))
+            .ignoring(NoSuchElementException.class);
+
+        WebElement element = wait.until(driver -> driver.findElement(By.id("submit")));
+
+- Use Case:
+    - When elements appear at unpredictable intervals.
+    - You want to fine-tune polling frequency and handle exceptions.
+    - Useful for flaky or slow-loading elements.
+- Limitations:
+    - Slightly more complex to implement.
+    - Overkill for simple waits.

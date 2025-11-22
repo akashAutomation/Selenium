@@ -1,0 +1,53 @@
+- In Selenium, locators are used to identify and interact with elements on a web page — like buttons,
+  input fields, links, etc. Choosing the right locator strategy is crucial for building robust, maintainable,
+  and fast test automation.
+
+- Locator Type:
+  ID - By.id()
+  name - By.name()
+  class name - By.className()
+  tag name- By.tagName()
+  Link Text- By.linkText()
+  Partial Link Text - By.partialLinkText()
+  CSS Selector - By.cssSelector()
+  XPath - By.xpath()
+
+🧠 What Is XPath?
+XPath (XML Path Language) is a query language for selecting nodes from an XML/HTML document.
+In Selenium, it helps locate elements based on their structure, attributes, or text content.
+
+🧩 Types of XPath
+1. Absolute XPath
+- Starts from the root (html) and follows the full path.
+- Fragile: breaks if the DOM structure changes.
+/html/body/div[2]/form/input[1]
+
+
+2. Relative XPath
+- Starts from anywhere in the DOM using //
+- More flexible and preferred in automation.
+//input[@id='username']
+
+XPath Axes (Advanced):
+- Axes define directional relationships between nodes. Instead of just selecting elements by tag or
+  attribute, you can move up, down, or sideways in the DOM tree.
+  Axes let you navigate relative to a node:
+Axis                | Description                                 | Example
+--------------------|---------------------------------------------|-----------------------------------------------
+child               | Selects direct children of a node           | //div/child::p
+descendant          | Selects all children, grandchildren, etc.   | //div/descendant::input
+parent              | Selects the immediate parent                | //input[@id='email']/parent::div
+ancestor            | Selects all ancestors up to the root        | //input/ancestor::form
+following           | All nodes after the current node            | //label[text()='Email']/following::input[1]
+preceding           | All nodes before the current node           | //input[@id='password']/preceding::label[1]
+following-sibling   | Siblings after the current node             | //h2/following-sibling::p
+preceding-sibling   | Siblings before the current node            | //p/preceding-sibling::h2
+self                | The current node itself                     | //input[@id='username']/self::input
+descendant-or-self  | The node and all its descendants            | //div[@id='main']/descendant-or-self::input
+
+
+
+
+
+
+

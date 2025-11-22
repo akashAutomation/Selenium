@@ -1,0 +1,41 @@
+- ChromeOptions is a powerful class in Selenium that lets you customize how Chrome behaves during test execution.
+  It’s essential for configuring headless mode, download paths, disabling popups, and more — especially in CI/CD
+  and parallel runs.
+  It’s part of the Selenium API that lets you pass startup arguments and preferences to the Chrome browser.
+
+  ChromeOptions options = new ChromeOptions();
+  WebDriver driver = new ChromeDriver(options);
+
+Common Use Cases
+1. Run Chrome in Headless Mode:
+   options.addArguments("--headless=new"); // use "--headless" for older versions
+   Useful for CI/CD pipelines or when no GUI is available.
+
+2. Set Download Directory:
+    Map<String, Object> prefs = new HashMap<>();
+    prefs.put("download.default_directory", "C:\\downloads");
+    prefs.put("download.prompt_for_download", false);
+    prefs.put("safebrowsing.enabled", true);
+    options.setExperimentalOption("prefs", prefs);
+    Ensures files are downloaded silently to a known folder.
+
+3. Disable Notifications and Popups
+    options.addArguments("--disable-notifications");
+    options.addArguments("--disable-popup-blocking");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

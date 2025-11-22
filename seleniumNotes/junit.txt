@@ -1,0 +1,59 @@
+🧪 What Is JUnit?
+- JUnit stands for Java Unit Testing.
+- JUnit is a widely used open-source testing framework for Java that helps developers write and run unit tests
+  efficiently. It ensures that individual components of your code behave as expected.
+
+🔍 Purpose of JUnit
+- Unit testing means testing the smallest testable parts of an application (usually methods).
+- JUnit helps you:
+- Verify correctness of code
+- Catch bugs early
+- Automate regression testing
+- Improve code quality and maintainability
+
+🧰 Key Features
+| Feature               | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| Annotations           | Simplifies test lifecycle (@Test, @BeforeEach, @AfterEach, etc.)            |
+| Assertions            | Validates expected vs actual results (assertEquals, assertTrue, etc.)       |
+| Test Suites           | Groups multiple test classes for batch execution                            |
+| Parameterized Tests   | Runs the same test with different inputs                                    |
+| Integration with IDEs | Works seamlessly with IntelliJ, Eclipse, Maven, Gradle                      |
+| CI/CD Friendly        | Easily integrates with Jenkins, GitHub Actions, etc.                        |
+
+🔄 JUnit Lifecycle Annotation
+| Annotation         | Purpose                                      |
+|--------------------|----------------------------------------------|
+| @BeforeEach        | Runs before each test method                 |
+| @AfterEach         | Runs after each test method                  |
+| @BeforeAll         | Runs once before all tests (static method)   |
+| @AfterAll          | Runs once after all tests (static method)    |
+| @Disabled          | Skips a test method                          |
+
+⚖️ JUnit vs TestNG: Feature Comparison
+| Feature                        | JUnit (especially JUnit 5)                   | TestNG                                      |
+|-------------------------------|----------------------------------------------|---------------------------------------------|
+| Origin                        | Open-source, part of xUnit family            | Inspired by JUnit, stands for "Next Gen"    |
+| Annotations                   | `@Test`, `@BeforeEach`, `@AfterEach`, etc.   | `@Test`, `@BeforeMethod`, `@AfterClass`, etc. |
+| Parameterized Tests           | Supported in JUnit 5                         | Supported with `@DataProvider`              |
+| Test Grouping                 | Limited (via tags in JUnit 5)                | Strong support using `groups`               |
+| Parallel Execution            | Limited, requires external config            | Built-in support                            |
+| Dependency Between Tests      | Not supported                                | Supported via `dependsOnMethods`            |
+| Suite Execution               | Via test runners or Maven                    | Via XML suite files                         |
+| Exception Testing             | `assertThrows()` in JUnit 5                  | `expectedExceptions` in `@Test`             |
+| Timeout Handling              | `@Timeout` in JUnit 5                        | `timeOut` attribute in `@Test`              |
+| IDE & Build Tool Integration  | Excellent (IntelliJ, Eclipse, Maven, Gradle) | Excellent                                   |
+| Community & Ecosystem         | Larger, more mature                         | Smaller but active                          |
+
+🧠 When to Use What?
+- Use JUnit if:
+- You want simplicity and wide community support.
+- You're using modern Java (JUnit 5 is modular and powerful).
+- You're integrating with tools that expect JUnit (e.g., Spring Boot, Android).
+
+- Use TestNG if:
+- You need advanced test configuration (e.g., dependencies, groups).
+- You want built-in parallel execution.
+- You prefer XML-based suite management.
+
+

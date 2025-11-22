@@ -2,6 +2,8 @@ Feature: Registration functionality
 
   Background:
     #Given user is on registration page "<link>"
+
+  @smoke
   Scenario Outline: Valid Registration
     Given user is on registration page "<link>"
     When validate current page "<title>"

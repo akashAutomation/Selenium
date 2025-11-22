@@ -1,0 +1,70 @@
+What Are Capabilities?
+- Capabilities define the browser, version, OS, and other settings for your test session.
+  They’re passed to the RemoteWebDriver to tell the grid or cloud service what environment to use.
+
+1. Using Selenium Grid (Local or Docker-Based)
+✅ Define Capabilities
+DesiredCapabilities caps = new DesiredCapabilities();
+caps.setBrowserName("chrome");
+caps.setPlatform(Platform.LINUX);
+
+
+✅ Merge with Browser Options
+ChromeOptions options = new ChromeOptions();
+options.addArguments("--headless=new");
+options.merge(caps);
+
+
+✅ Connect to Grid Hub
+WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+
+
+This tells the Grid to launch a Chrome browser on a Linux node.
+
+
+☁️ 2. Using BrowserStack or LambdaTest
+✅ Define Capabilities for Cloud Grid
+DesiredCapabilities caps = new DesiredCapabilities();
+caps.setCapability("browserName", "Chrome");
+caps.setCapability("browserVersion", "latest");
+caps.setCapability("os", "Windows");
+caps.setCapability("osVersion", "11");
+caps.setCapability("name", "Login Test");
+caps.setCapability("build", "Regression Suite");
+
+
+✅ Connect to Remote WebDriver
+String USERNAME = System.getenv("BS_USERNAME");
+String ACCESS_KEY = System.getenv("BS_ACCESS_KEY");
+String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub";
+
+WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
+
+
+Use environment variables to keep credentials secure and CI-friendly.
+
+3. TestNG + Maven Integration
+Pass parameters via testng.xml or Maven CLI:
+mvn test -Dbrowser=chrome -Dremote=true -DgridUrl=http://localhost:4444/wd/hub
+
+🌐 RemoteWebDriver (Remote Execution)
+✅ What It Is
+- Connects to a remote server (like Selenium Grid, BrowserStack, LambdaTest) via HTTP.
+- Sends commands over the network to control browsers on other machines or containers.
+🔍 Example
+DesiredCapabilities caps = new DesiredCapabilities();
+caps.setBrowserName("chrome");
+
+WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
+
+
+🧩 Use Case
+- Distributed testing across multiple machines
+- Cross-browser/OS testing
+- CI/CD pipelines
+- Cloud-based grids
+
+
+
+
+
