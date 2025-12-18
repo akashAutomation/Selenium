@@ -1,6 +1,7 @@
 package stepdefs;
 
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,6 +14,8 @@ import support.ExcelUtils;
 import utilities.LoggerUtility;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 
 public class RegistrationSteps {
@@ -24,7 +27,6 @@ public class RegistrationSteps {
     @Given("user is on registration page {string}")
     public void userIsOnRegistrationPage(String s) {
         logger.info("-------user is on registration page-------");
-        //System.out.println("-------user is on registration page-------");
         registrationPage.navigateToUrl(s);
     }
 
@@ -35,7 +37,7 @@ public class RegistrationSteps {
 
     @Then("user enters {string} and {string}")
     public void userEntersFirstnameAndLastname(String firstname, String lastname) throws IOException {
-        System.out.println("-------userEntersFirstnameAndLastname-------");
+        logger.info("-------userEntersFirstnameAndLastname-------");
         System.out.println("fullname = "+firstname+" "+lastname);
         registrationPage.enterFullName(firstname, lastname);
     }
@@ -61,5 +63,36 @@ public class RegistrationSteps {
     @Then("create .xlsx file and sheet")
     public void createXlsxFileAndSheet() {
         ExcelUtils.createExcelFileAndSheet("src/test/resources/data/newcreated/created_excel.xlsx","Test",0,0, "written value by using poi");
+    }
+
+    @Then("user enters firstname and lastname")
+    public void user_enters_firstname_and_lastname(DataTable dataTable) {
+//        // Convert DataTable to List<List<String>>
+//        List<List<String>> list = dataTable.asLists(String.class);
+//
+//        // First row usually contains headers
+//        List<String> headers = list.get(0);
+//        System.out.println("Headers: " + headers);
+//
+//        // Iterate through remaining rows
+//        for(int i=1; i<list.size(); i++){
+//            List<String> row= list.get(i);
+//            String firstname = row.get(0); // first column
+//            String lastname = row.get(1); //second column
+//            registrationPage.enterFullName(row.get(0), row.get(1));
+//            System.out.println("firstname: " + firstname + " - lastname: " + lastname);
+//
+//        }
+
+        //converted into a list of maps
+        List<Map<String, String>> map = dataTable.asMaps(String.class, String.class);
+        for(Map<String, String> data : map){
+            String firstname = data.get("firstname"); // column header firstname
+            String lastname = data.get("lastname");  // column header lastname
+            registrationPage.enterFullName(firstname, lastname);
+            System.out.println("firstname: " + firstname + " - lastname: " + lastname);
+
+        }
+
     }
 }

@@ -1,9 +1,9 @@
-🧪 What Is JUnit?
+👉 What Is JUnit?
 - JUnit stands for Java Unit Testing.
 - JUnit is a widely used open-source testing framework for Java that helps developers write and run unit tests
   efficiently. It ensures that individual components of your code behave as expected.
 
-🔍 Purpose of JUnit
+👉 Purpose of JUnit
 - Unit testing means testing the smallest testable parts of an application (usually methods).
 - JUnit helps you:
 - Verify correctness of code
@@ -11,7 +11,7 @@
 - Automate regression testing
 - Improve code quality and maintainability
 
-🧰 Key Features
+👉 Key Features
 | Feature               | Description                                                                 |
 |-----------------------|-----------------------------------------------------------------------------|
 | Annotations           | Simplifies test lifecycle (@Test, @BeforeEach, @AfterEach, etc.)            |
@@ -21,7 +21,7 @@
 | Integration with IDEs | Works seamlessly with IntelliJ, Eclipse, Maven, Gradle                      |
 | CI/CD Friendly        | Easily integrates with Jenkins, GitHub Actions, etc.                        |
 
-🔄 JUnit Lifecycle Annotation
+👉 JUnit Lifecycle Annotation
 | Annotation         | Purpose                                      |
 |--------------------|----------------------------------------------|
 | @BeforeEach        | Runs before each test method                 |
@@ -30,7 +30,7 @@
 | @AfterAll          | Runs once after all tests (static method)    |
 | @Disabled          | Skips a test method                          |
 
-⚖️ JUnit vs TestNG: Feature Comparison
+👉 JUnit vs TestNG: Feature Comparison
 | Feature                        | JUnit (especially JUnit 5)                   | TestNG                                      |
 |-------------------------------|----------------------------------------------|---------------------------------------------|
 | Origin                        | Open-source, part of xUnit family            | Inspired by JUnit, stands for "Next Gen"    |
@@ -45,7 +45,7 @@
 | IDE & Build Tool Integration  | Excellent (IntelliJ, Eclipse, Maven, Gradle) | Excellent                                   |
 | Community & Ecosystem         | Larger, more mature                         | Smaller but active                          |
 
-🧠 When to Use What?
+👉 When to Use What?
 - Use JUnit if:
 - You want simplicity and wide community support.
 - You're using modern Java (JUnit 5 is modular and powerful).

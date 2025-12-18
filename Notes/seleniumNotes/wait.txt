@@ -1,4 +1,4 @@
-Selenium provides three main types of waits: Implicit Wait, Explicit Wait, and Fluent Wait.
+👉 Selenium provides three main types of waits: Implicit Wait, Explicit Wait, and Fluent Wait.
 Each serves a different purpose for handling dynamic web elements and synchronization issues during test execution.
 
 1. Implicit Wait

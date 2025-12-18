@@ -1,4 +1,4 @@
-What Are Capabilities?
+👉What Are Capabilities?
 - Capabilities define the browser, version, OS, and other settings for your test session.
   They’re passed to the RemoteWebDriver to tell the grid or cloud service what environment to use.
 
@@ -18,11 +18,10 @@ options.merge(caps);
 ✅ Connect to Grid Hub
 WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
 
-
 This tells the Grid to launch a Chrome browser on a Linux node.
 
 
-☁️ 2. Using BrowserStack or LambdaTest
+👉️ 2. Using BrowserStack or LambdaTest
 ✅ Define Capabilities for Cloud Grid
 DesiredCapabilities caps = new DesiredCapabilities();
 caps.setCapability("browserName", "Chrome");
@@ -40,25 +39,23 @@ String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@hub-cloud.browserstack
 
 WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
 
-
 Use environment variables to keep credentials secure and CI-friendly.
 
 3. TestNG + Maven Integration
 Pass parameters via testng.xml or Maven CLI:
 mvn test -Dbrowser=chrome -Dremote=true -DgridUrl=http://localhost:4444/wd/hub
 
-🌐 RemoteWebDriver (Remote Execution)
+👉 RemoteWebDriver (Remote Execution)
 ✅ What It Is
 - Connects to a remote server (like Selenium Grid, BrowserStack, LambdaTest) via HTTP.
 - Sends commands over the network to control browsers on other machines or containers.
-🔍 Example
+ Example
 DesiredCapabilities caps = new DesiredCapabilities();
 caps.setBrowserName("chrome");
 
 WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
 
-
-🧩 Use Case
+👉 Use Case
 - Distributed testing across multiple machines
 - Cross-browser/OS testing
 - CI/CD pipelines

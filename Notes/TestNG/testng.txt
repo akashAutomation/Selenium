@@ -1,0 +1,131 @@
+ 👉 TestNG:
+- It is an open source automated TestNG framework. In TestNG, NG stands for "Next Generation".
+- TestNG is a testing framework inspired from JUnit and NUnit.
+- It is for the Java programming language.
+- It covers a broader range of test categories: unit, functional, end-to-end, integration, etc.
+
+👉 Advantages --> 1. TestNG provides HTML reports by default for test execution. You can even add your own custom reports when required.
+				   2. Annotations made testers life easy
+				   3. Test cases can be Grouped & Prioritized more easily
+                   4. Parallel testing is possible
+                   5. Generates Logs
+                   6. Data Parameterization is possible --> This feature allows you to pass the arguments as parameters and this achieved by using @Parameters annotation
+                   7. To achieve the data-driven testing, DataProvider feature is used.
+                   8. It allows to define dependency of one test method over other method.
+
+
+👉 TestNG Annotations --> 1. TestNG annotations are the code that is written inside your source test code logic to control the flow of the execution of tests.
+  						 2.	It is essential to annotate your methods in TestNG to run the tests.
+  						 3.	TestNG will ignore the method which does not contain an annotation since it won't know when to execute this method.
+						 4.	A TestNG annotation starts from the symbol "@".
+
+  Types of TestNG Annotations -->
+  		1. @BeforeSuite - Runs once before all tests in the suite. Ideal for setting up global configurations
+		2. @AfterSuite - Runs once after all tests in the suite. Used for cleanup.
+		3. @BeforeTest - Runs once before any test methods in the <test> tag of your XML suite(testng.xml).Runs once per <test> tag, not per class or method.
+		4. @AfterTest - Runs after all test methods in the <test> tag.
+		5. @BeforeClass - Runs once before the first method in the current class. Great for initializing shared resources.
+		6. @AfterClass - Runs once after all methods in the current class.
+		7. @BeforeMethod - Runs before each @Test method. Ideal for resetting test state.
+		8. @AfterMethod - Runs after each @Test method. Useful for cleanup between tests.
+		9. @BeforeGroups - The @BeforeGroups annotated method run only once for a group before the execution of all test cases belonging to that group.
+		10. @AfterGroups - The @AfterGroups annotated method run only once for a group after the execution of all test cases belonging to that group.
+		11. @Test - Runs a test method. You can add attributes like priority, dependsOnMethods, enabled, etc.
+		12. @DataProvider - Supplies data to a test method. Enables data-driven testing.
+		13. @Parameters	- Injects parameters from your XML suite file
+		14. @Listeners- Attaches custom listeners for logging, reporting, etc.
+
+		<suite name="MySuite">
+            <test name="LoginTests">
+                <classes>
+                    <class name="com.demo.LoginTest"/>
+                    <class name="com.demo.DashboardTest"/>
+                </classes>
+            </test>
+        </suite>
+
+
+  Hierarchy of the TestNG Annotations:
+   		1. @BeforeSuite
+		2. @BeforeTest
+		3. @BeforeClass
+		4. @BeforeMethod
+		5. @Test
+		6. @AfterMethod
+		7. @AfterClass
+		8. @AfterTest
+		9. @AfterSuite
+
+👉 Importance Of testng.xml file --> In a selenium testng project, we use testng.xml file to configure the complete test suite in a single file.
+ 									It is a heart of testng framework. This is also called runner file. Some features are:
+
+  									1. It allows to include or exclude the execution of test methods and test groups.
+  									2. It allows pass parameters to the test cases
+  									3. Allows to add group dependencies
+  									4. Allows to add priorities to the test cases
+  									5. Allows to configure parallel execution of test cases.
+  									6. Allows to parameterize the test cases.
+
+👉 TestNG Assertions --> Assert is a class in TestNG.TestNG assertions helps us to verify the condition of the test in the middle of the test run. Based on the TestNG
+  						assertions, we will consider a successful test only it is completed the test run without throwing any exception.
+  						Some of the common assertions are:
+  						1. assertEquals(String actual, String expected)
+  						2. assertEquals(String actual, String expected, String message)
+  						3. assertEquals(boolean actual, boolean expected)
+  						4. assertEquals(boolean actual, boolean expected, String message)
+  						5. assertTrue(boolean condition)
+             			5. assertTrue(boolean condition, String message)
+             			5. assertFalse(boolean condition)
+             			5. assertFalse(boolean condition, String message)
+
+  Soft Assert --> Soft Assert collects error during @Test.Soft Assert does not throw an exception when an assert fails and would continue
+  				  with the next step after the assert statement.
+  		          If there is any exception and you want to throw it then you need to use assertAll() method as a last statement in the
+  				  @Test and test suite again continue with the next @Test as it is.
+
+  Hard Assert --> Hard Assert throws an AssertException immediately when an assert statement fails and test suite continue with
+  				  the next @Test.
+
+
+👉 Exception in TestNG --> TestNG gives an option for tracing the exception handling of code. You can verify whether a code
+  							   throws the expected exception or not. The expected exception to validate while running the test case
+  							   is mentioned using the expectedExceptions attribute value along with @Test annotations
+
+  Q. How Can  we create data driven framework using TestNG?
+  A. By using @DataProvider annotation.
+
+  Q. How to run test cases in parallel using testng?
+  A. We can use "parallel" attribute in testng.xml
+  	 The "parallel" attribute of suite tag can accept 4 values:
+  	 	1. tests --> All the test cases inside <test> tag of testng.xml file will run parallel.
+  	 	2. classes --> All the test cases inside a java class will run parallel.
+  	 	3. methods --> All the methods with @Test annotation will execute parallel
+  	 	4. instances --> Test cases in same instance will execute parallel but two methods of two different instances will run in different thread.
+
+  Q. verbose in testng.xml
+  A. 1. you will get more detailed console output of you test cases.
+     2. If you keep increasing the value of verbose, you will get more detailed console output of you test cases.
+     3. you can give only 0-10 count in verbose. 0 will give basic output, 10 will give more detailed output
+
+👉 Thread-count-->
+  1. The thread-count attribute in TestNG controls how many threads will be used to run your tests in parallel.
+  2. Minimum: 1
+     - A value of 0 is invalid and will cause TestNG to ignore parallel execution or throw an error.
+     Maximum: There’s no hard upper limit, but it depends on:
+     - Your CPU core count
+     - Memory availability
+     - Browser driver stability (e.g., too many Chrome instances can crash your system)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

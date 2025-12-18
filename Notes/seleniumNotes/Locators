@@ -1,8 +1,8 @@
-- In Selenium, locators are used to identify and interact with elements on a web page — like buttons,
+👉 In Selenium, locators are used to identify and interact with elements on a web page — like buttons,
   input fields, links, etc. Choosing the right locator strategy is crucial for building robust, maintainable,
   and fast test automation.
 
-- Locator Type:
+👉 Locator Type:
   ID - By.id()
   name - By.name()
   class name - By.className()
@@ -12,11 +12,11 @@
   CSS Selector - By.cssSelector()
   XPath - By.xpath()
 
-🧠 What Is XPath?
+👉 What Is XPath?
 XPath (XML Path Language) is a query language for selecting nodes from an XML/HTML document.
 In Selenium, it helps locate elements based on their structure, attributes, or text content.
 
-🧩 Types of XPath
+👉 Types of XPath
 1. Absolute XPath
 - Starts from the root (html) and follows the full path.
 - Fragile: breaks if the DOM structure changes.

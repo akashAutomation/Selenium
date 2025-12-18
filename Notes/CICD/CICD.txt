@@ -1,0 +1,30 @@
+👉 Continuous Integration (CI)
+- Definition: Developers frequently merge code changes into a shared repository.
+- Automation: Each commit triggers automated builds and tests.
+- Goal: Catch bugs early, ensure code integrates smoothly, and maintain a working build at all times.
+- Example:
+    - Developer pushes code → Jenkins/GitHub Actions runs mvn test → Test results published.
+    - If tests fail, the pipeline blocks deployment until fixed.
+
+👉 Continuous Delivery (CD)
+- Definition: Ensures that every code change is automatically built, tested, and prepared for release.
+- Deployment: The software is always in a deployable state, but release to production may still require manual approval.
+              It requires to clicking on button to deploy as it requires manual intervention.
+- Goal: Shorten release cycles, reduce risk, and make deployments routine.
+- Example:
+    - After CI passes, artifacts are packaged and deployed to a staging environment.
+    - Ops team can approve and push to production.
+
+👉 Continuous Deployment (CD)
+- Definition: Extends Continuous Delivery by automatically deploying every successful build to production without manual intervention.
+- Goal: Deliver features to users quickly and continuously.
+- Example:
+    - Code passes CI → Automatically deployed to production servers.
+    - Users see new features immediately.
+
+| Aspect               | Continuous Integration (CI) | Continuous Delivery (CD) | Continuous Deployment (CD) |
+|----------------------|------------------------------|---------------------------|-----------------------------|
+| **Focus**            | Code integration + testing   | Ready-to-deploy builds    | Automatic production release |
+| **Automation Level** | Build + test                 | Build + test + package    | Build + test + deploy        |
+| **Manual Step?**     | No                          | Yes (approval step)       | No                          |
+

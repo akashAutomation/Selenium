@@ -1,12 +1,12 @@
-- JavaScript browser alert, which can be one of the following types:
+👉 JavaScript browser alert, which can be one of the following types:
 
-⚠️ Types of JavaScript Alerts in Selenium
+👉️ Types of JavaScript Alerts in Selenium
 | Type               | Description                                         | Example |
 | Simple Alert       | Shows a message with an OK button                   | alert("This is a simple alert");    |
 | Confirmation Alert | Shows a message with OK and Cancel buttons          | confirm("Do you want to proceed?"); |
 | Prompt Alert       | Shows a message with an input field, OK, and Cancel | prompt("Enter your name:");         |
 
-🧠 How Selenium Handles Them
+👉 How Selenium Handles Them
 - alertIsPresent() detects any of the above.
 - You then use driver.switchTo().alert() to interact:
     - .accept() → Clicks OK
@@ -21,11 +21,11 @@ Example:
     alert.accept();                          // Click OK
 
 
-🧱 What Is a Frame?
+👉 What Is a Frame?
 - A frame is an HTML element (<iframe> or <frame>) that embeds another HTML document within the current page.
 - Commonly used for ads, embedded widgets, or third-party content.
 
-🔁 Switching Between Frames
+👉 Switching Between Frames
 Selenium provides multiple ways to switch into a frame:
 1. By Index:
         driver.switchTo().frame(0); // Switch to the first frame on the page
@@ -37,7 +37,7 @@ Selenium provides multiple ways to switch into a frame:
         WebElement frame = driver.findElement(By.tagName("iframe"));
         driver.switchTo().frame(frame); // Switch using a located frame element
 
-⬅️ Switching Back to Main Content:
+👉 Switching Back to Main Content:
 - After interacting with the frame, switch back to the main page:
     driver.switchTo().defaultContent(); // Goes back to the top-level page
 

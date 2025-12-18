@@ -1,0 +1,21 @@
+👉 The Select class in Selenium is a specialized helper class used to handle dropdown menus (<select> HTML elements).
+
+Key Points:
+- Only works with <select> tags in HTML.
+- Provides methods to select/deselect options by index, value, or visible text.
+- Useful for single‑select and multi‑select dropdowns.
+- Part of org.openqa.selenium.support.ui.Select.
+
+👉 Common Methods
+- selectByIndex(int index) → Selects option by position (0‑based).
+- selectByValue(String value) → Selects option by the value attribute.
+- selectByVisibleText(String text) → Selects option by the text shown to the user.
+- deselectByIndex(int index) → Deselects option by index (multi‑select only).
+- deselectAll() → Clears all selected options (multi‑select only).
+- getOptions() → Returns all options in the dropdown.
+- getFirstSelectedOption() → Returns the currently selected option.
+
+Example:
+        Select select = new Select(webelement);
+        select.selectByVisibleText("India");  // Select by visible text
+

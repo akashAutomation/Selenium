@@ -1,0 +1,260 @@
+👉 What is API:
+- An API (Application Programming Interface) is a set of rules and protocols that allows different software
+  applications to communicate with each other, exchange data, and perform functions without needing to know
+  each other’s internal details.
+- An API is like a contract between two systems. It defines how requests and responses should be structured.
+
+Analogy: -
+    Client: The one who makes the request(like browser, app)
+    API: the middleman that passes the request to the server and brings back the response.
+    Server: where all the processing happens(the backend)
+
+Imagine a restaurant:
+- You (the client) order food.
+- The waiter (API) takes your request to the kitchen (server).
+- The chef prepares the dish and gives it to the waiter.
+- The waiter delivers it back to you.
+ You don’t need to know how the kitchen works; the API handles the communication.
+
+👉 How APIs Work
+- Request: A client sends a request (e.g., “Give me user details”).
+- Processing: The server interprets the request and fetches data.
+- Response: The API returns the result in a structured format (often JSON or XML).
+- Example (REST API in Postman):
+    GET https://api.example.com/users/123
+    Response:
+    {
+      "id": 123,
+      "name": "abc",
+      "email": "abc@example.com"
+    }
+
+👉 Why APIs Are Important
+- Integration: Connects different systems (e.g., payment gateway with e-commerce site).
+- Efficiency: Reuses existing services instead of reinventing the wheel.
+- Scalability: Enables modular, flexible architectures.
+- Innovation: Powers apps like weather forecasts, maps, social media integrations.
+
+👉 Real-World Examples
+• 	Payment: PayPal API lets apps process transactions.
+• 	Travel: Airlines expose APIs for booking and flight status.
+• 	Social Media: Facebook Graph API lets apps fetch posts, likes, and user data.
+•   Used Google Maps API inside a food delivery app.
+• 	Testing: Tools like Postman let you send requests to APIs to validate responses.
+
+👉 Types of API:
+1. Hardware API: Control hardware devices. Ex: camera api, printer api
+2. Software/OS API: Interfaces to system-level functions, Ex: windows api, android api
+3. Web API: Accessed via HTTP, often REST or GraphQL, Ex: Twitter API, Google Maps API
+
+👉 API Architectures / Protocol Types
+API Type        | Why It Matters for QA                                | Example in Testing
+----------------|------------------------------------------------------|--------------------
+REST API        | Most common in modern apps; lightweight, JSON-based  | Validate login, CRUD operations, microservice endpoints
+SOAP API        | Still used in legacy/enterprise systems; strict XML  | Test banking/insurance systems with WSDL contracts
+GraphQL API     | Flexible queries; lets you fetch exactly what’s needed | Test e-commerce apps where you query product + inventory in one call
+gRPC API        | High-performance, binary protocol; often in microservices | Test communication between backend services in CI/CD
+WebSocket API   | Real-time, bidirectional communication               | Test chat apps, live dashboards, trading platforms
+
+👉 What is a REST API?
+- REST stands for Representational State Transfer.
+- It’s an architectural style for designing web services.
+- A REST API exposes resources (like users, books, orders) via URLs and lets clients interact with them using standard HTTP methods.
+
+👉 Core Principles of REST
+- Stateless
+    - Each request from client → server must contain all the information needed.
+    - The server doesn’t remember client state between requests.
+- Resource-based
+    - Everything is treated as a resource (user, product, order).
+    - Each resource is identified by a unique URI (e.g., /users/123).
+- Uniform Interface
+    - Standard HTTP methods are used consistently:
+        - GET → Retrieve data
+        - POST → Create new resource
+        - PUT → Replace existing resource
+        - PATCH → Update part of a resource
+        - DELETE → Remove resource
+- Representation
+    - Resources are usually represented in JSON (sometimes XML).
+- Stateless + Cacheable
+    - Responses can be cached to improve performance.
+
+👉 POSTMAN:
+- Postman is a popular API testing and collaboration tool that lets you send requests to APIs, inspect responses,
+  and organize your testing workflows. It’s widely used by developers, testers, and QA engineers because it makes
+  working with APIs much easier than writing raw curl commands or custom scripts.
+
+👉 Collection in postman:
+- A collection in Postman is basically a group of saved API requests that you can organize, reuse, and share.
+  Think of it as a test suite or project folder for your API testing.
+
+👉 API request methods:
+- API request methods (also called HTTP methods or verbs). These define the type of action you want to perform
+  on a resource in a REST API.
+
+Method   | Purpose                          | Example                          | Notes
+---------|----------------------------------|----------------------------------|-----------------------------------------------
+GET      | Retrieve data (read-only)        | GET /users/123                   | Safe, doesn’t change data
+POST     | Create a new resource            | POST /users { "name": "Akash" }  | Non-idempotent (multiple calls create multiple records)
+PUT      | Replace an existing resource     | PUT /users/123 { full user obj } | Idempotent (same request repeated → same result)
+PATCH    | Update part of a resource        | PATCH /users/123 { "email": "new@mail.com" } | Partial update, more efficient
+DELETE   | Remove a resource                | DELETE /users/123                | Idempotent (same request repeated → resource stays deleted)
+HEAD     | Retrieve headers only            | HEAD /users/123                  | Useful for metadata, no body returned
+OPTIONS  | Discover supported methods       | OPTIONS /users                   | Helpful for CORS and debugging
+
+👉 HTTP status codes:
+- HTTP status codes in APIs, we’re referring to the numeric codes returned by the server that indicate the
+  result of your request.
+
+Categories of HTTP Response Code:
+
+Code Range | Category        | Meaning
+-----------|-----------------|-----------------------------------------------
+1xx        | Informational   | Request received, continuing process
+2xx        | Success         | Request was successfully received, understood, and accepted
+3xx        | Redirection     | Further action needed (e.g., redirect to another URL)
+4xx        | Client Error    | Problem with the request (bad input, unauthorized, not found)
+5xx        | Server Error    | Problem on the server side
+
+👉 Common Response Codes:
+
+200   OK                    → Request succeeded (after GET)
+201   Created               → A new resource was created successfully (after POST)
+204   No Content            → Request succeeded but no body returned (often after DELETE)
+301   Moved Permanently     → Resource moved to a new URL
+302   Found                 → Temporary redirect
+400   Bad Request           → Invalid request (syntax or parameters)
+401   Unauthorized          → Authentication required or failed
+403   Forbidden             → You don’t have permission
+404   Not Found             → Requested resource could not be found. Resource or route doesn’t exist
+409   Conflict              → Request conflicts with current state (e.g., duplicate record)
+500   Internal Server Error → Generic server-side failure
+502   Bad Gateway           → Invalid response from upstream server
+503   Service Unavailable   → Server temporarily overloaded or down
+
+👉 What is cURL?
+- cURL stands for Client URL.
+- It’s a command-line tool used to send requests to servers over URLs.
+- Supports multiple protocols: HTTP, HTTPS, FTP, SMTP, IMAP, etc.
+- Commonly used for API testing, debugging, and automation scripts.
+
+👉 URI vs URL vs URN Cheat Sheet:
+
+| Term    | Full Form                   | Definition                                                                                 | Example |
+| **URI** | Uniform Resource Identifier | A string that uniquely identifies a resource on the web. It can be a URL or a URN.         | `https://jsonplaceholder.typicode.com/posts/1` |
+| **URL** | Uniform Resource Locator    | A type of URI that specifies the location of a resource (includes protocol, domain, path). | `https://jsonplaceholder.typicode.com/posts/1` |
+| **URN** | Uniform Resource Name       | A type of URI that names a resource without specifying its location.                       | `urn:isbn:0451450523` |
+
+👉 What is an Endpoint?
+- An endpoint is the specific path/URL where an API resource can be accessed.
+- It’s the part of the URI that comes after the base URI.
+- Think of it as the "door" to a particular function or resource in the API.
+
+Example:
+    Full URI: https://instagram.com/users/1/post
+    - Base URI → https://instagram.com
+    - Endpoint → /users/1/post
+
+Types of Endpoints
+- Collection endpoint → /users (returns all users)
+- Single resource endpoint → /posts/1 (returns one user by ID)
+- Action endpoint → /users/1/post (returns related data)
+
+👉 Major Authentication Types in REST APIs
+1. Basic Authentication:
+ - How it works: Username and password are sent in the HTTP Authorization header, encoded in Base64.
+ - Pros: Simple to implement.
+ - Cons: Insecure if not used with HTTPS (credentials can be intercepted).
+ - Use Case: Internal APIs, quick prototypes.
+ - Rest Assured Example:
+    given()
+        .auth().basic("user", "password")
+    .when()
+        .get("/secure")
+    .then()
+        .statusCode(200);
+
+2. API Keys:
+ - How it works: A static key is passed in headers or query parameters.
+ - Pros: Easy to implement, widely supported.
+ - Cons: Keys can be leaked; no user identity, just application identity.
+ - Use Case: Public APIs (e.g., Google Maps, Weather APIs).
+ - Rest Assured Example:
+    given()
+        .header("x-api-key", "your_api_key")
+    .when()
+        .get("/data")
+    .then()
+        .statusCode(200);
+
+3. Token-Based Authentication (JWT)
+ - How it works: Server issues a signed token (JSON Web Token) after login. Client sends token in headers for subsequent requests.
+ - Pros: Stateless, scalable, secure if implemented correctly.
+ - Cons: Token theft can compromise security; requires careful expiry/refresh handling.
+ - Use Case: Modern web/mobile apps, microservices.
+ - Rest Assured Example:
+    given()
+        .header("Authorization", "Bearer " + jwtToken)
+    .when()
+        .get("/profile")
+    .then()
+        .statusCode(200);
+
+4. OAuth 1.0
+ - How it works: Uses consumer key/secret + access token/secret to sign requests.
+ - Pros: Secure, request signing prevents tampering.
+ - Cons: Complex, largely replaced by OAuth 2.0.
+ - Use Case: Legacy APIs (Twitter used OAuth 1.0).
+ - Rest Assured Example:
+    given()
+        .auth().oauth("consumerKey", "consumerSecret", "accessToken", "secretToken")
+    .when()
+        .get("/protected")
+    .then()
+        .statusCode(200);
+
+5. OAuth 2.0
+ - How it works: Uses access tokens (Bearer tokens) issued by an authorization server. Supports scopes, refresh tokens, delegated access.
+ - Pros: Industry standard, flexible, secure.
+ - Cons: More complex to implement.
+ - Use Case: Modern APIs (Google, Facebook, GitHub).
+ - Rest Assured Example:
+    given()
+        .auth().oauth2("access_token_here")
+    .when()
+        .get("/user")
+    .then()
+        .statusCode(200);
+
+👉 Query Parameter:
+- Query parameters are added at the end of the url to send extra information to the server.
+- Key-value pairs appended to the URL after a ? to filter, sort, or modify the request.
+- Usage: Used when the parameter is optional or filter, sort, or modify the result set.
+- Format: /resource?key=value
+- Example:
+    GET /books?author=test&price=10
+    - author=test and limit=10 are query parameters.
+
+👉 Path Parameter:
+- Definition: Values embedded directly in the URL path to identify a specific resource.
+              - It tells the API which exact resource you want.
+- Usage: Used when the parameter is essential to locate the resource.
+- Format: /resource/{id}
+- Example:
+    GET /users/123/orders
+    - 123 identifies the user.
+    - give a list of orders collection of that user’s orders.
+- you can use multiple path parameters in an API
+  GET /users/123/orders/456
+
+👉 Think of path parameters as the address of the house, while query parameters are the instructions for what you want inside
+   the house (like sorting or filtering).
+
+
+
+
+
+
+
+

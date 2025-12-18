@@ -70,13 +70,6 @@
             <version>2.20.0</version>
         </dependency>
 
-        <!-- Log4j2 API -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-
         <!-- For .xlsx files -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -84,6 +77,21 @@
             <version>5.4.1</version>
         </dependency>
 
+        <!-- RestAssured for API testing -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JSON Schema Validator for response validation -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

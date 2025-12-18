@@ -1,0 +1,16 @@
+👉 The Action class in Selenium is used to handle advanced user interactions like mouse movements, keyboard
+  inputs, drag‑and‑drop, and right‑clicks. It allows you to simulate complex real‑world user behavior that basic
+  WebDriver commands (like click() or sendKeys()) cannot achieve.
+- Example:  Actions actions = new Actions(driver);
+            actions.moveToElement(menu).perform(); // Hover over the menu
+
+👉 Commonly Used Methods:
+- click(WebElement element) → Performs a left click.
+- doubleClick(WebElement element) → Double‑clicks on the element.
+- contextClick(WebElement element) → Right‑clicks on the element.
+- moveToElement(WebElement element) → Moves the mouse pointer to the element (hover).
+- dragAndDrop(source, target) → Drags an element from source to target.
+- sendKeys(Keys key) → Simulates keyboard key presses (e.g., Keys.ENTER, Keys.CONTROL).
+
+
+

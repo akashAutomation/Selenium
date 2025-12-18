@@ -1,7 +1,7 @@
-Selenium is a popular open-source framework used to automate web browsers for testing web applications
+👉 Selenium is a popular open-source framework used to automate web browsers for testing web applications
 across different platforms and browsers.
 
-🧪 What Selenium Does
+👉 What Selenium Does
 - Automates browser actions like clicking buttons, filling forms, navigating pages, and verifying content.
 - Used primarily for functional testing, regression testing, and cross-browser compatibility.
 - Supports multiple programming languages: Java, Python, JavaScript, C#, Ruby, and more.
@@ -10,31 +10,31 @@ across different platforms and browsers.
     - selenium-webdriver for JavaScript (Node.js)
 
 
-🧰 Selenium Tool Suite
+👉 Selenium Tool Suite
 Selenium is not a single tool — it’s a suite of components:
 1. Selenium WebDriver --> Core API to automate browsers using code
 2. Selenium IDE --> Browser extension for record-and-playback testing
 3. Selenium Grid --> Runs tests in parallel across multiple machines/browsers
 4. Selenium RC (deprecated) --> Legacy tool replaced by WebDriver
 
-🌐 Browser & Platform Support
+👉 Browser & Platform Support
 - Works with Chrome, Firefox, Edge, Safari, etc.
 - Compatible with Windows, macOS, Linux
 - Can run tests locally or remotely (e.g., Selenium Grid, cloud services like BrowserStack)
 
-✅ Why Use Selenium?
+👉 Why Use Selenium?
 - Free and open-source
 - Language flexibility (Java, Python, etc.)
 - Cross-browser testing
 - CI/CD integration (Jenkins, GitHub Actions)
 - Scalable with frameworks like TestNG, JUnit, Cucumber
 
-⚠️ Limitations
+👉 Limitations
 - Only automates web applications (not desktop or mobile apps natively)
 - Requires programming knowledge
 - No built-in reporting — needs integration with tools like ExtentReports or Allure
 
-🔁 Selenium WebDriver Workflow
+👉 Selenium WebDriver Workflow
 Here’s how a typical Selenium WebDriver test executes:
 1. Test Script Execution
     - You write a test using Selenium APIs in your preferred language.
@@ -53,6 +53,6 @@ Here’s how a typical Selenium WebDriver test executes:
 7. Result Processing
     - Your test script processes the result and continues with the next command.
 
-Page Object Model (POM):
+👉 Page Object Model (POM):
 The Page Object Model (POM) is a design pattern in Selenium test automation that promotes modularity,
 maintainability, and reusability by separating the page structure (UI elements) from the test logic.

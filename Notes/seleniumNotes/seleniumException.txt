@@ -1,7 +1,7 @@
-Selenium exceptions are runtime errors that occur during test execution, often due to issues with element interaction, timing, or browser state. Understanding and handling them is key to building robust automation frameworks.
+👉 Selenium exceptions are runtime errors that occur during test execution, often due to issues with element interaction, timing, or browser state. Understanding and handling them is key to building robust automation frameworks.
 Here’s a breakdown of the most common Selenium exceptions and how to handle them effectively:
 
-🚨 Top Selenium WebDriver Exceptions
+👉 Top Selenium WebDriver Exceptions
 | Exception Name                     | Description                                      | Common Cause                                      |
 |-----------------------------------|--------------------------------------------------|---------------------------------------------------|
 | NoSuchElementException            | Element not found in the DOM                     | Locator is incorrect or element not loaded yet    |
@@ -16,7 +16,7 @@ Here’s a breakdown of the most common Selenium exceptions and how to handle th
 | MoveTargetOutOfBoundsException    | Target location is outside viewport              | Trying to move to an off-screen element           |
 
 
-🧠 What Is StaleElementReferenceException?
+👉 What Is StaleElementReferenceException?
 This exception occurs when a WebElement you previously located becomes detached from the DOM. Selenium throws it when you try to interact with an element that is no longer valid due to a DOM refresh or update.
 Typical causes:
 - Page reloads or AJAX calls that re-render parts of the DOM.
@@ -24,7 +24,7 @@ Typical causes:
 - JavaScript dynamically replaces the element.
 - Implicit or explicit waits that outlive the element’s lifecycle.
 
-🛠️ How to Fix or Avoid It
+How to Fix or Avoid It:
 Here are proven strategies to handle it:
 1. Re-locate the element before interaction
 2. Use ExpectedConditions.refreshed() with WebDriverWait

@@ -1,0 +1,137 @@
+👉 What is REST Assured:
+- REST Assured is a popular Java library for API automation testing. You can build a framework around it using
+  Maven, TestNG/JUnit, and reusable utility classes.
+- REST Assured is an open-source Java DSL (Domain Specific Language) for testing REST APIs.
+- It integrates seamlessly with JUnit/TestNG and Maven.
+- Supports BDD-style syntax (given(), when(), then()) for readability.
+- Handles JSON/XML parsing, serialization, and deserialization easily.
+- Officially supported: Java (and Groovy by extension).
+- Community port: RestAssured.Net for C#.
+- Alternatives for other languages and tools:
+    - Python → requests + pytest
+    - JavaScript → supertest or axios + jest/mocha
+    - cypress -> Cypress isn’t just for UI automation — it has built-in support for API testing via
+                 the cy.request() command. You can use it to send HTTP requests (GET, POST, PUT, DELETE, etc.)
+                 and validate responses directly inside your Cypress tests.
+
+👉 Do we need Rest Assured DSL chain (.given(), .when(), .then()) in Cucumber?
+- Cucumber already provides the BDD keywords (Given, When, Then) in your feature files.
+- Rest Assured also uses .given(), .when(), .then() — but these are Java methods that form its DSL (Domain Specific Language).
+ So, they serve different purposes:
+- Cucumber keywords → Define steps in plain English (Given I set the base URI).
+- Rest Assured methods → Build and execute HTTP requests inside your step definitions
+
+Conclusion:
+- Not mandatory to use Rest Assured’s .given()/.when()/.then() — you could call RestAssured.get(endpoint) directly.
+- Use the DSL when you want readability, maintainability, and flexibility — especially in a BDD framework
+  where the style aligns with Cucumber’s Given/When/Then.
+
+👉 import io.restassured.RestAssured;
+- This imports the main RestAssured class.
+- RestAssured → used to send the request.
+- It provides static methods to configure and send HTTP requests.
+- Commonly used methods:
+    - RestAssured.baseURI → set the base URL for all requests.
+    - RestAssured.given() → start building a request (headers, params, body).
+    - RestAssured.get(), post(), put(), delete() → send requests directly.
+- Example:
+    RestAssured.baseURI = "https://jsonplaceholder.typicode.com";
+    Response response = RestAssured.get("/posts/1");
+
+👉 import io.restassured.response.Response;
+- This imports the Response interface/class from Rest Assured.
+- Response → used to capture and validate the response.
+- Represents the HTTP response returned after making a request.
+- Provides methods to:
+    - response.getStatusCode() → get HTTP status code.
+    - response.getBody().asString() → get raw response body.
+    - response.jsonPath().get("key") → extract JSON values.
+    - response.getHeaders() → access headers.
+- Example:
+    Response response = RestAssured.get("/posts/1");
+    System.out.println("Status Code: " + response.getStatusCode());
+    System.out.println("Title: " + response.jsonPath().getString("title"));
+
+
+👉 Where .log().all() Can Be Used:
+  - .log().all() is part of the validation chain (then() section), not the request execution (when()).
+  - That means you cannot directly do:
+      given()
+        .when()
+        .get("/posts/1")
+        .log().all();   // ❌ Not valid here
+    because .log() is not available immediately after .when()
+- You need to place .log().all() after .then() only.
+    given()
+      .when()
+      .get("/posts/1")
+      .then()
+      .log().all();   // valid
+- .extract().response() → required if you want to store the response in a Response object for further use.
+
+👉 What’s Inside a Response Object:
+The Response object gives you everything about the HTTP response:
+- Status (code, line)
+- Headers
+- Cookies
+- Body (raw, pretty, parsed JSON/XML)
+- Performance metric
+
+1. Status Information
+    - response.getStatusCode() → HTTP status code (e.g., 200, 404, 500).
+    - response.getStatusLine() → Full status line (e.g., HTTP/1.1 200 OK).
+2. Headers
+    - response.getHeaders() → All headers.
+    - response.getHeader("Content-Type") → Specific header value.
+3. Cookies
+    - response.getCookies() → All cookies.
+    - response.getCookie("JSESSIONID") → Specific cookie.
+4. Body
+    - response.getBody().asString() → Raw body as plain text.
+    - response.getBody().prettyPrint() → Formatted JSON/XML body.
+    - response.jsonPath().get("key") → Extract values from JSON.
+    - response.xmlPath().get("tag") → Extract values from XML.
+5. Time & Performance
+    - response.getTime() → Response time in milliseconds.
+    - response.getTimeIn(TimeUnit.SECONDS) → Response time in custom unit.
+6. Other Utilities
+    - response.as(Class<T>) → Deserialize body into a POJO.
+    - response.path("jsonKey") → Shortcut for extracting JSON values.
+    - response.print() → Print raw body directly.
+
+👉 Rest Assured Request Methods Cheat Sheet:
+Request building methods in Rest Assured.
+
+| Category        | Method / Property                        | Example Usage                                        | Purpose |
+|-----------------|------------------------------------------|------------------------------------------------------|---------|
+| Base Config     | `RestAssured.baseURI`                    | `RestAssured.baseURI = "https://api.example.com";`   | Set base URI for all requests |
+|                 | `RestAssured.port`                       | `RestAssured.port = 8080;`                           | Set port |
+|                 | `RestAssured.basePath`                   | `RestAssured.basePath = "/v1";`                      | Set base path |
+|   Request Start | `given()`                                | `given().when().get("/users");`                      | Start building a request |
+|   Logging       | `log().all()`                            | `given().log().all()`                                | Log full request details |
+|                 | `log().headers()`                        | `given().log().headers()`                            | Log request headers |
+|                 | `log().body()`                           | `given().log().body()`                               | Log request body |
+|   Headers       | `header(name, value)`                    | `given().header("Content-Type", "application/json")` | Add single header |
+|                 | `headers(Map<String, String>)`           | `given().headers(map)`                               | Add multiple headers |
+|   Params        | `queryParam(name, value)`                | `given().queryParam("id", 1)`                        | Add query parameter |
+|                 | `pathParam(name, value)`                 | `given().pathParam("userId", 10)`                    | Add path parameter |
+|                 | `formParam(name, value)`                 | `given().formParam("username", "Akash")`             | Add form parameter |
+| **Body**        | `body(Object)`                           | `given().body("{\"name\":\"Akash\"}")`               | Add request body (JSON/XML/String/POJO) |
+| **Auth**        | `auth().basic(user, pass)`               | `given().auth().basic("admin", "password")`          | Basic authentication |
+|                 | `auth().oauth2(token)`                   | `given().auth().oauth2("token123")`                  | OAuth2 authentication |
+| **Methods**     | `get(endpoint)`                          | `given().when().get("/users")`                       | Send GET request |
+|                 | `post(endpoint)`                         | `given().when().post("/users")`                      | Send POST request |
+|                 | `put(endpoint)`                          | `given().when().put("/users/1")`                     | Send PUT request |
+|                 | `delete(endpoint)`                       | `given().when().delete("/users/1")`                  | Send DELETE request |
+| **Validation**  | `then().statusCode(int)`                 | `.then().statusCode(200)`                            | Validate status code |
+|                 | `then().body(key, matcher)`              | `.then().body("id", equalTo(1))`                     | Validate response body |
+| **Extract**     | `then().extract().response()`            | `.then().extract().response()`                       | Extract full response |
+|                 | `then().extract().path("jsonKey")`       | `.then().extract().path("id")`                       | Extract specific field |
+
+
+
+
+
+
+
+

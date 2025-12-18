@@ -1,8 +1,8 @@
-- Cucumber is a Behavior-Driven Development (BDD) testing framework that allows you to write test cases in
+👉 Cucumber is a Behavior-Driven Development (BDD) testing framework that allows you to write test cases in
   plain English using a language called Gherkin. It bridges the gap between technical and non-technical
   stakeholders by making test scenarios readable and understandable by everyone involved in the development process.
 
-- Cucumber keywords:
+👉 Cucumber keywords:
 | Keyword           | Purpose                                                                 | Example Usage                                      |
 |-------------------|-------------------------------------------------------------------------|----------------------------------------------------|
 | Feature           | Describes the high-level functionality being tested                     | Feature: User login functionality                  |
@@ -18,7 +18,7 @@
 | Rule              | Groups related scenarios under a business rule (optional, advanced)     | Rule: Password must be at least 8 characters       |
 | #                 | Comment line (ignored by Cucumber)                                      | # This scenario tests login failure                |
 
-Cucumber hooks:
+👉 Cucumber hooks:
 - Cucumber hooks are special blocks of code that run before or after scenarios, steps, or features to manage setup,
   teardown, logging, and more. They help reduce code duplication and centralize test lifecycle logic.
 
@@ -31,7 +31,7 @@ Cucumber hooks:
 | BeforeAll (Java 8+)   | @BeforeAll       | Once before all scenarios (static method)    | Global setup like DB connection or config loading      |
 | AfterAll (Java 8+)    | @AfterAll        | Once after all scenarios (static method)     | Global teardown like closing DB or flushing reports    |
 
-
+👉 Cucumber Exception
 | Exception Type                     | Description                                                                 | Typical Cause                                           |
 |-----------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------|
 | UndefinedStepException            | Step in feature file has no matching definition                            | Missing or misnamed step definition                     |
@@ -43,6 +43,99 @@ Cucumber hooks:
 | HookExecutionException            | Error in @Before, @After, or @BeforeStep hook                              | Faulty setup/teardown logic                             |
 | PendingException                  | Step marked as pending (e.g., throw new PendingException())                | Placeholder for unimplemented step                      |
 
-Tags
-- Enables selective execution (@smoke, @regression, @ignore).
-- Supports logical filtering (@login and not @slow).
+
+👉 TestRunner file:
+- The TestRunner file is the control center of your Cucumber framework. It tells Cucumber where to find features, which steps to use,
+  what reports to generate, and how to display output.
+
+1. @RunWith(Cucumber.class):
+  - Tells JUnit to run this class using the Cucumber runner.
+  - Without this, JUnit won’t know how to execute feature files
+
+2. @CucumberOptions
+    This annotation configures how Cucumber runs. Key options:
+- features
+    Path to your .feature files.
+    Example: "src/test/resources/features"
+- glue
+    Package(s) containing your step definitions.
+    Example: {"stepDefinitions"}
+- tags
+    Run only scenarios with specific tags.
+    Example: "@SmokeTest" runs only smoke tests.
+            You can combine: "@Regression and not @Ignore"
+- plugin
+    Defines report formats. Common plugins:
+    - "pretty" → readable console output
+    - "html:target/cucumber-reports.html" → HTML report
+    - "json:target/cucumber.json" → JSON report (for CI/CD tools like Jenkins)
+- monochrome
+    - true → Console output is clean, no special characters/colors.
+    - false → Output may include ANSI colors/symbols.
+- dryRun
+    - true → Checks if all steps in feature files have matching step definitions (without executing actual tests).
+    - false → Runs the actual tests normally.
+
+3. Class Declaration
+    public class TestRunner {
+    }
+    - Empty class body because all configuration is handled by annotations.
+    - Acts as the entry point for running Cucumber tests
+    Normally it’s empty, but you might add code if:
+    - You override methods in AbstractTestNGCucumberTests (e.g., for parallel execution).
+    - You add custom hooks or listeners.
+    - You integrate with reporting frameworks beyond the plugins
+
+4. AbstractTestNGCucumberTests :
+    - This is a base class provided by the Cucumber-TestNG integration library.
+    - When your TestRunner extends it, Cucumber scenarios are automatically mapped into TestNG test methods.
+    - This allows you to use TestNG features like:
+        - Parallel execution
+        - Test grouping
+        - Advanced reporting
+        - Integration with CI/CD tools
+
+👉 DataTable:
+Data Tables in Cucumber are a powerful way to pass structured data from your .feature file into step definitions.
+They’re especially useful when you want to avoid hardcoding multiple values or when you need tabular input.
+
+When to Use Data Tables
+- When you want structured input for a single step.
+- When you need to pass multiple values without creating a Scenario Outline.
+- When you want to keep data visible in the feature file but avoid duplication.
+
+Way to convert datatable:
+- Use List for single-column tables(List<String>).
+- Use List of Lists or Maps for multi-column tables(List<List<String>> OR List<Map<String, String>>).
+Example:
+    1. List<String> list = dataTable.asLists(String.class); --> for single-column tables
+    1. List<List<String>> list = dataTable.asLists(String.class); --> multi-column tables
+    2. List<Map<String, String>> users = dataTable.asMaps(String.class, String.class); --> multi-column tables
+
+
+
+👉 TestNG Data Provider integration using cucumber:
+    @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
+
+1. Object[][]
+    - This is a two‑dimensional array of Objects.
+    - Each inner array (Object[]) represents one set of parameters for a test run.
+    - In this case, each row corresponds to one Cucumber scenario that TestNG will execute.
+2. scenarios() method
+    - Defined in AbstractTestNGCucumberTests.
+    - It provides all the scenarios from your .feature files to TestNG as data sets.
+    - By overriding it, you can customize how scenarios are supplied (e.g., enable parallel execution).
+3. return super.scenarios();
+    - Calls the parent class (AbstractTestNGCucumberTests) implementation.
+    - That method already knows how to collect all scenarios from your Cucumber feature files.
+    - So you’re simply reusing the parent’s logic instead of writing your own.
+4. @DataProvider(parallel = true)
+    - Marks this method as a TestNG DataProvider.
+    - Each row of Object[][] is fed into the test runner as one execution.
+    - parallel = true means multiple scenarios can run concurrently in separate threads, speeding up execution.
+
+
