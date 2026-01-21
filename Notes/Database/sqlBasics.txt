@@ -1,0 +1,71 @@
+👉 SQL (Structured Query Language) is not a single language but a family of standardized commands and dialects used
+   to interact with relational databases.
+
+1. DDL (Data Definition Language)
+   - Defines and manages database structures.
+   - Commands: CREATE, ALTER, DROP, TRUNCATE
+2. DML (Data Manipulation Language)
+   - Handles data inside tables.
+   - Commands: INSERT, UPDATE, DELETE, MERGE
+3. DQL (Data Query Language)
+   - Focuses on retrieving data.
+   - Command: SELECT
+4. DCL (Data Control Language)
+   - Manages permissions and access.
+   - Commands: GRANT, REVOKE
+5. TCL (Transaction Control Language)
+   - Controls transactions and ensures data integrity.
+   - Commands: COMMIT, ROLLBACK, SAVEPOINT
+
+👉 Categories of SQL Data Types:
+1. Numeric Data Types
+Used to store numbers for calculations, counts, and financial data.
+- INT / INTEGER → Whole numbers (e.g., 1, 1000).
+- BIGINT → Very large integers.
+- SMALLINT / TINYINT → Smaller ranges of integers.
+- DECIMAL / NUMERIC → Fixed precision numbers (e.g., salaries, currency).
+- FLOAT / REAL / DOUBLE → Approximate precision numbers (scientific data).
+- BIT / BOOLEAN → True/False values (varies by dialect).
+
+2. Character & String Data Types
+Used for text, names, addresses, and descriptions.
+- CHAR(n) → Fixed-length string (pads with spaces).
+- VARCHAR(n) → Variable-length string (efficient storage).
+- TEXT / CLOB → Large text blocks (e.g., articles, logs).
+- ENUM (MySQL) → Predefined list of values (e.g., gender: 'M', 'F').
+- SET (MySQL) → Multiple predefined values in one column.
+
+3. Date & Time Data Types
+Used for scheduling, timestamps, and logs.
+- DATE → Stores only date (YYYY-MM-DD).
+- TIME → Stores only time (HH:MM:SS).
+- DATETIME → Stores both date and time.
+- TIMESTAMP → Date/time with automatic updates (often used for logging).
+- YEAR (MySQL) → Stores year values.
+
+4. Binary Data Types
+Used for files, images, and raw data.
+- BINARY / VARBINARY → Fixed or variable-length binary data.
+- BLOB (Binary Large Object) → Large binary data (images, multimedia).
+- BYTEA (PostgreSQL) → Binary storage.
+
+5. Specialized Data Types
+- BOOLEAN → True/False (native in PostgreSQL, simulated in MySQL).
+- JSON → Stores JSON documents (supported in MySQL, PostgreSQL, SQL Server).
+- XML → Stores XML data (SQL Server, Oracle).
+- ARRAY (PostgreSQL) → Stores arrays of values.
+- GEOMETRY / Spatial types → For GIS data (MySQL, PostgreSQL)
+
+👉 Naming convention in sql:
+SQL Standard:
+- SQL identifiers (like table names, database names, column names) are case-insensitive by default.
+- That means Student, student, and STUDENT are treated the same in queries.
+
+Note: - Not always small letters → It depends on the operating system and MySQL configuration.
+      - Safe practice → Stick to lowercase for database and table names to avoid surprises.
+
+General Rules
+- ✅ Always use lowercase for portability.
+- ✅ Use underscores for multi-word names.
+
+

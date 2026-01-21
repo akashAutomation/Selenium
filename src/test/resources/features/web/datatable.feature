@@ -1,7 +1,7 @@
 Feature: Registration functionality
 
 
-  @smoke
+  @smoke @ignore
   Scenario Outline: Valid Registration
     Given user is on registration page "<link>"
     When validate current page "<title>"

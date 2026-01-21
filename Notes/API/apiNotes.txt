@@ -146,6 +146,8 @@ Code Range | Category        | Meaning
 | **URL** | Uniform Resource Locator    | A type of URI that specifies the location of a resource (includes protocol, domain, path). | `https://jsonplaceholder.typicode.com/posts/1` |
 | **URN** | Uniform Resource Name       | A type of URI that names a resource without specifying its location.                       | `urn:isbn:0451450523` |
 
+Note: All URLs are URIs, but not all URIs are URLs.
+
 👉 What is an Endpoint?
 - An endpoint is the specific path/URL where an API resource can be accessed.
 - It’s the part of the URI that comes after the base URI.
@@ -251,7 +253,15 @@ Types of Endpoints
 👉 Think of path parameters as the address of the house, while query parameters are the instructions for what you want inside
    the house (like sorting or filtering).
 
-
+👉 API Validation using script:
+pm.test("api validation", function() {
+	pm.response.to.have(200);
+	pm.expect(pm.response.responseTime).to.be.below(2000);
+	pm.expect(pm.response.json().userId).to.not.be.null;
+	pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");
+	pm.expect((pm.response.json()).to.have.property("userId");
+    pm.expect((pm.response.json()).to.have.keys(["userId", "name", "email"]);
+});
 
 
 

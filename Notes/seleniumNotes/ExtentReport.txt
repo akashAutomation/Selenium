@@ -1,0 +1,81 @@
+👉 Create Extent Report Manager
+    Utility class to initialize Extent:
+
+Why Do We Need an Extent Report Manager?
+- Extent Reports requires initialization before you can log anything.
+- If you initialize it inside every test or hook, you’ll end up with duplicate code and possibly multiple report files.
+- A singleton utility class (ExtentManager) ensures:
+    - Only one ExtentReports object is created for the entire test run.
+    - Centralized configuration (report name, system info, theme).
+    - Easy reuse across hooks, step definitions, or listeners.
+
+
+👉 ExtentService vs ExtentReports
+- If You’re using ExtentService (from ExtentReports v5) instead of manually creating an ExtentReports object.
+- ExtentService is a singleton service that manages the lifecycle of ExtentReports internally.
+- The static block ensures that as soon as ReportManager is loaded, system info is added to the report.
+So yes — this is valid and correct usage if you’re relying on Extent’s built‑in service layer.
+
+⚡ Key Points to Know
+
+- ExtentReports → you manually create and flush reports.
+- ExtentService → Extent manages reports automatically (especially useful with Cucumber/TestNG plugins).
+- System Info
+    - Your code correctly sets metadata like Browser, Environment, and Author.
+    - This info will appear in the report header.
+- When to Use
+    - If you’re running with Cucumber plugins (plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"} in your runner), then ExtentService is the right approach.
+    - If you’re using plain Selenium/TestNG without the adapter, you’d typically use ExtentReports + ExtentSparkReporter instead.
+
+👉 Steps to Integrate Extent Reports with Cucumber Runner
+1. Add the Adapter Dependency
+In your pom.xml
+<dependency>
+    <groupId>tech.grasshopper</groupId>
+    <artifactId>extentreports-cucumber7-adapter</artifactId>
+    <version>1.7.0</version> <!-- use latest -->
+</dependency>
+
+2. Configure ReportManager
+Your ReportManager with ExtentService is correct — it sets system info globally:
+
+import com.aventstack.extentreports.service.ExtentService;
+
+public class ReportManager {
+    static {
+        ExtentService.getInstance().setSystemInfo("Browser", "Chrome");
+        ExtentService.getInstance().setSystemInfo("Environment", "QA");
+        ExtentService.getInstance().setSystemInfo("Author", "Akash");
+    }
+}
+
+3. Update Cucumber Runner
+In your runner class, add the Extent adapter plugin:
+
+@CucumberOptions(
+    features = "src/test/resources/features",
+    glue = {"stepdefs","hooks"},
+    plugin = {
+        "pretty",
+        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+    }
+)
+
+4. Configure Report Output
+Create a file extent.properties in your src/test/resources folder:
+
+extent.reporter.spark.start=true
+extent.reporter.spark.out=target/ExtentReport.html
+extent.reporter.spark.config=src/test/resources/spark-config.xml
+
+
+⚡ How It Works
+- The ExtentCucumberAdapter plugin automatically hooks into Cucumber’s lifecycle.
+- Every scenario is logged into the Extent report without you writing extent.createTest() manually.
+- Your ReportManager adds system info globally.
+- Reports are generated in target/ExtentReport.html after execution
+
+👉 Recruiter‑Ready Talking Point
+"I integrated Extent Reports with Cucumber using the ExtentCucumberAdapter plugin. This way, every scenario is
+automatically logged into a professional HTML report. I centralized system info in a ReportManager class,
+and customized styling via extent.propertiesl. This produces clean, reusable reports without extra code in step definitions.”

@@ -104,11 +104,11 @@ When to Use Data Tables
 - When you need to pass multiple values without creating a Scenario Outline.
 - When you want to keep data visible in the feature file but avoid duplication.
 
-Way to convert datatable:
+Ways to convert datatable:
 - Use List for single-column tables(List<String>).
 - Use List of Lists or Maps for multi-column tables(List<List<String>> OR List<Map<String, String>>).
 Example:
-    1. List<String> list = dataTable.asLists(String.class); --> for single-column tables
+    1. List<String> list = dataTable.asList(String.class); --> for single-column tables
     1. List<List<String>> list = dataTable.asLists(String.class); --> multi-column tables
     2. List<Map<String, String>> users = dataTable.asMaps(String.class, String.class); --> multi-column tables
 

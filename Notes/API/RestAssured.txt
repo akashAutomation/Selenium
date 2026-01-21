@@ -52,6 +52,9 @@ Conclusion:
     System.out.println("Status Code: " + response.getStatusCode());
     System.out.println("Title: " + response.jsonPath().getString("title"));
 
+👉 given() --> used for content type, set cookies, add auth, add param, set header info etc.
+   when() --> used for get, post, put, delete
+   then() --> used for validate response code, extract response, extract header cookies and response body etc.
 
 👉 Where .log().all() Can Be Used:
   - .log().all() is part of the validation chain (then() section), not the request execution (when()).
@@ -129,9 +132,39 @@ Request building methods in Rest Assured.
 |                 | `then().extract().path("jsonKey")`       | `.then().extract().path("id")`                       | Extract specific field |
 
 
+👉 Common Ways to Create Request Body in Java
 
+1. Using Map / HashMap
+    ex: Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("username", "testUser");
+        requestBody.put("password", "Pass@123");
 
+        given()
+            .contentType("application/json")
+            .body(requestBody)
+            .post("/login");
 
+2. External File (JSON / Excel)
+ex: String requestBody = new String(Files.readAllBytes(Paths.get("src/test/resources/user.json")));
 
+    given()
+        .contentType("application/json")
+        .body(requestBody)
+        .post("/login");
 
+3. POJO (Plain Old Java Object)
+ex: class User {
+        private String username;
+        private String password;
+        // getters & setters
+    }
+
+    User user = new User();
+    user.setUsername("testUser");
+    user.setPassword("Pass@123");
+
+    given()
+        .contentType("application/json")
+        .body(user)
+        .post("/login");
 

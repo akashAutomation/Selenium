@@ -16,7 +16,7 @@ public class ReportingHooks extends BaseController {
     @AfterStep
     public void captureScreenshot(Scenario scenario) throws IOException {
 
-        if (scenario.isFailed()) {
+        if (scenario.isFailed() && driver != null) {
             try {
                 // 1. Capture screenshot as file
                 File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

@@ -1,0 +1,248 @@
+👉 SQL commands:
+
+Create/Drop:
+    CREATE DATABASE mydb;
+    DROP DATABASE mydb;  //completely drop database
+    CREATE SCHEMA mydb;
+    DROP SCHEMA mydb;
+    DROP TABLE student; //completely drop table with structure
+
+    CREATE TABLE student(
+    no INT,
+    name VARCHAR(100),
+    marks INT
+    );
+
+Conditional(IF EXISTS/IF NOT EXISTS):
+    CREATE DATABASE IF NOT EXISTS mydb;
+    DROP DATABASE IF EXISTS mydb;
+    CREATE SCHEMA IF NOT EXISTS mydb;
+    DROP SCHEMA IF EXISTS mydb;
+
+Insert:
+3 ways to insert value:
+    INSERT INTO student VALUES(12,'ak',100);
+    INSERT INTO student (name, marks, no) VALUES('aka',100, 1);  //using this way we can change the insertion order.
+    INSERT INTO student VALUES(3,'ak',NULL); // pass NULL if you don't know the value
+
+Select:
+    SELECT * FROM student;  //retreive all data from table
+    SELECT name, marks FROM student;  //retreive specific column data from table
+    SELECT marks+10 FROM student;  //it will add 10 in existing value and show the data
+
+Where clause:
+    SELECT * FROM student WHERE marks>90;
+    SELECT * FROM student WHERE marks>=90;
+    SELECT * FROM student WHERE marks<=90;
+    SELECT * FROM student WHERE marks IS NULL; //show NULL records only
+    SELECT * FROM student WHERE marks IS NOT NULL;
+    SELECT DISTINCT name FROM student;   //shows only unique records and avoid duplication
+    SELECT DISTINCT * FROM student; // remove only duplicate rows
+
+    Note: - Any comparison (=, <, >, BETWEEN, etc.) with NULL returns UNKNOWN, not TRUE or FALSE. so it will be excluded
+            from result.
+
+Logical Operators(AND/OR/NOT):
+    SELECT * from student WHERE marks>90 AND name='ak'; //diplay all records which has marks>90 and name='ak'
+    SELECT * from student WHERE marks>90 OR name='ak'; //diplay all records which has marks>90 or name='ak'
+    SELECT * from student WHERE NOT name='aka'; //exclude all records which have name='aka'
+
+Between/In operators: - BETWEEN 90 AND 100 means marks ≥ 90 and marks ≤ 100
+    SELECT * from student WHERE marks BETWEEN 90 AND 100; // include 90 and 100 as well
+    SELECT * from student WHERE marks NOT BETWEEN 90 AND 100;
+    SELECT * from student WHERE marks IN(90,100); //checks if marks equal to 90, 100 then display those record only
+    SELECT * from student WHERE marks NOT IN(90,100); //checks if marks not equal to 90, 100 then display those record only
+
+Pattern Matching operators(Wild card operators):
+    '%' = many characters
+    '_' = single character
+
+    SELECT * from student WHERE name LIKE 'a%'; //display only those records which name starts with 'a'
+    SELECT * from student WHERE name LIKE '%a'; //display only those records which name ends with 'a'
+    SELECT * from student WHERE name LIKE 'i%a'; //display only those records which name starts with 'i' and ends with 'a'
+    SELECT * from student WHERE name LIKE '%a%'; //contains 'a' anywhere in the string (beginning, middle, or end).
+    SELECT * from student WHERE name NOT LIKE 'a%'; //display only those records which name should NOT starts with 'a'
+    SELECT * from student WHERE name LIKE '%a_'; //display only those records which name should have 2nd last char 'a' and only 1 char after 'a'
+    SELECT * from student WHERE name LIKE '___'; // should have only 3 char in name
+
+ALTER:
+    ALTER TABLE student ADD(grade VARCHAR(2)); // to add new column
+    ALTER TABLE student DROP COLUMN grade; // to remove specific column
+    ALTER TABLE student MODIFY COLUMN name VARCHAR(10); // to modify existing column(like change datatype, change size of datatype etc.)
+    ALTER TABLE student RENAME COLUMN grade TO grd; // rename existing column name
+
+TRUNCATE:
+    TRUNCATE FROM student; //permanently delete the table data but structure is present, you can not rollback the data.
+
+DELETE:
+    DELETE FROM student; //temporary delete the table data only not structure, you can rollback the data.
+    ROLLBACK; // rollback the deleted data
+
+RENAME table:
+    RENAME TABLE student TO std; // rename table
+
+Utility Commands:
+Extra commands often used in MySQL.
+- SHOW → Display metadata
+    SHOW DATABASES;
+    SHOW TABLES;
+    SHOW COLUMNS FROM employees;
+
+- DESCRIBE → Table structure
+    DESCRIBE employees;
+
+    COMMIT; //commit the changes permanently in DB
+
+👉 MySQL Built-in Functions:
+1. String Functions: operate on String datatypes
+2. Numeric functions: operate on numeric datatypes
+3. Date & Time Functions: operate on date datatypes
+4. Aggregate functions: operate on all datatypes and produce summerized result sets.
+5. JSON functions: operate on json objects
+6. control flow : condition matching
+
+| **Category**   | **Function**                         | details                                                          | **Example Query**                                                | **Result** |
+|----------------|--------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------|
+| **String**     | CONCAT(str, str,...)                 | Joins multiple strings                                           | SELECT CONCAT('Hello', ' ', 'Akash');                            | Hello Akash |
+|                | LENGTH(str)                          | Returns string length                                            | SELECT LENGTH('Copilot');                                        | 7 |
+|                | UPPER(str)                           | Converts to uppercase                                            | SELECT UPPER('copilot');                                         | COPILOT |
+|                | LOWER(str)                           | Converts to lowercase                                            | SELECT LOWER('COPILOT');                                         | copilot |
+|                | SUBSTRING(str, pos, len)             | Extracts part of a string                                        | SELECT SUBSTRING('Automation', 1, 4);                            | Auto |
+|                | REPLACE(str, from, to)               | Replaces occurrences of a substring                              | SELECT REPLACE('SQL Guide','Guide','Cheat Sheet');               | SQL Cheat Sheet |
+|                | INSTR(str, substr)                   | Finds position of substring                                      | SELECT INSTR('Framework','work');                                | 6 |
+|                | TRIM(str)                            | Removes leading/trailing spaces/char                             | SELECT TRIM(' xyz '); SELECT TRIM('z' from 'zabzcz')             | xyz, abzc |
+|----------------|--------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------|
+| **Numeric**    | ABS(num)                             | Absolute value                                                   | SELECT ABS(-15);                                                 | 15 |
+|                | ROUND(num, decimal)                  | Rounds to decimal places                                         | SELECT ROUND(123.456, 2);                                        | 123.46 |
+|                | CEIL(num)                            | Rounds up                                                        | SELECT CEIL(4.2);                                                | 5 |
+|                | FLOOR(num)                           | Rounds down                                                      | SELECT FLOOR(4.8);                                               | 4 |
+|                | MOD(num, div)                        | Remainder of division                                            | SELECT MOD(10, 3);                                               | 1 |
+|                | POWER(num, pow)                      | Raises num to the power pow                                      | SELECT POWER(2, 3);                                              | 8 |
+|                | RAND()                               | Generates random number between 0 and 1                          | SELECT RAND();                                                   | 0.5342… |
+|                | TRUNCATE(num, pos)                   | Cuts off decimal places without rounding                         | SELECT TRUNCATE(123.4567, 3); SELECT TRUNCATE(123.4567, -1);     | 123.456, 120 |
+|----------------|--------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------|
+| **Date/Time**  | NOW()                                | Current date and time                                            | SELECT NOW();                                                    | 2026-01-21 16:43:00 |
+|                | SYSDATE()                            | System date and time                                             | SELECT SYSDATE();                                                | 2026-01-21 18:08:19 |
+|                | CURDATE()                            | Current date                                                     | SELECT CURDATE();                                                | 2026-01-21 |
+|                | CURTIME()                            | Current time                                                     | SELECT CURTIME();                                                | 16:43:00 |
+|                | DATE_ADD(date, INTERVAL x unit)      | Adds interval to date                                            | SELECT DATE_ADD('2026-01-21', INTERVAL 10 DAY);                  | 2026-01-31 |
+|                | DATEDIFF(date1, date2)               | Difference in days                                               | SELECT DATEDIFF('2026-01-21','2026-01-01');                      | 20 |
+|                | YEAR(date)                           | Extracts parts of a date                                         | SELECT YEAR('2026-01-21');                                       | 2026 |
+|                | MONTH(date)                          | Extracts parts of a date                                         | SELECT MONTH('2026-01-21');                                      | 1 |
+|                | DAY(date)                            | Extracts parts of a date                                         | SELECT DAY('2026-01-21');                                        | 21 |
+|                | STR_TO_DATE(str, format)             | Converts a string into a date                                    | SELECT STR_TO_DATE('21-01-2026', '%d-%m-%Y');                    | 2026-01-21 |
+|----------------|--------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------|
+| **Aggregate**  | COUNT()                              | Number of rows                                                   | SELECT COUNT(*) FROM employees;                                  | 42 |
+|                | SUM(colname)                         | Total sum                                                        | SELECT SUM(salary) FROM employees;                               | 250000 |
+|                | AVG(colname)                         | Average value                                                    | SELECT AVG(salary) FROM employees;                               | 5952.38 |
+|                | MIN(colname)                         | Minimum value                                                    | SELECT MIN(salary) FROM employees;                               | 3000 |
+|                | MAX(colname)                         | Maximum value                                                    | SELECT MAX(salary) FROM employees;                               | 12000 |
+|                | GROUP_CONCAT(colname)                | Concatenates values from a group                                 | SELECT GROUP_CONCAT(name) FROM employees;                        | Akash,Ravi,Neha |
+|----------------|--------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------|
+| **JSON**       | JSON_EXTRACT()                       | Extracts data from JSON                                          | SELECT JSON_EXTRACT('{"name":"Akash","role":"QA"}', '$.role');   | "QA" |
+|                | JSON_OBJECT()                        | Creates JSON object                                              | SELECT JSON_OBJECT('name','Akash','role','QA');                  | {"name":"Akash","role":"QA"} |
+|                | JSON_ARRAY()                         | Creates JSON array                                               | SELECT JSON_ARRAY('Java','SQL','API');                           | ["Java","SQL","API"] |
+|                | JSON_SET()                           | Updates JSON value                                               | SELECT JSON_SET('{"name":"Akash"}', '$.role','QA');              | {"name":"Akash","role":"QA"} |
+|----------------|--------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------|
+| **Control Flow** | IF()                               | Conditional logic                                                | SELECT IF(10>5,'Yes','No');                                      | Yes |
+|                | CASE                                 | Multi-condition branching                                        | SELECT CASE WHEN 10>5 THEN 'True' ELSE 'False' END;              | True |
+|                | IFNULL()                             | Returns alternative if NULL                                      | SELECT IFNULL(NULL,'Default');                                   | Default |
+|                | NULLIF()                             | Returns NULL if equal                                            | SELECT NULLIF(10,10);                                            | NULL |
+
+👉 Group By, HAVING clause:
+- Used with aggregate functions (COUNT, SUM, AVG, MIN, MAX, etc.).
+- Groups rows that have the same values in specified columns into summary rows.
+- HAVING clause: to filter the output from the group by clause.
+- A non‑aggregated column is any column in your SELECT statement that is not inside an aggregate function like SUM(), COUNT(), AVG(), MIN(), or MAX().
+- Since it’s not summarized, SQL needs to know how to group it — that’s why it must appear in the GROUP BY clause.
+Ex:
+    SELECT department, AVG(salary) FROM employees GROUP BY department HAVING COUNT(*) > 10;
+    - department → non‑aggregated column (must be in GROUP BY).
+    - AVG(salary) → aggregated column (doesn’t need to be in GROUP BY)
+
+Notes:
+- WHERE filters before grouping, HAVING filters after grouping.
+- Always include non-aggregated columns in the GROUP BY clause.
+- Useful for reports, summaries, analytics.
+
+👉 Order By clause:
+- Sorts the result set by one or more columns.
+- Default is ascending (ASC) order.
+- You can explicitly specify ASC (ascending) or DESC (descending).
+- Can sort by column names, aliases, or even expressions
+Ex:
+    SELECT name, salary FROM employees ORDER BY salary ASC;
+
+👉 SQL Set Operators
+1. UNION
+- Combines results from two queries.
+- Removes duplicates by default.
+Ex:
+    SELECT name FROM employees UNION SELECT name FROM managers;
+Result: Unique list of names from both tables.
+
+2. UNION ALL
+- Same as UNION, but keeps duplicates.
+Ex:
+    SELECT name FROM employees UNION ALL SELECT name FROM managers;
+Result: All names, including duplicates.
+
+3. INTERSECT ( Not supported in MySQL directly)
+- Returns rows common to both queries.
+- MySQL workaround: use INNER JOIN or IN.
+Ex:
+    SELECT name FROM employees WHERE name IN (SELECT name FROM managers);
+
+4. EXCEPT / MINUS (Not supported in MySQL directly)
+- Returns rows from the first query that are not in the second.
+- MySQL workaround: use LEFT JOIN with NULL check or NOT IN.
+Ex:
+    SELECT name FROM employees WHERE name NOT IN (SELECT name FROM managers);
+
+Notes:
+- All queries combined with set operators must have the same number of columns and compatible data types.
+
+👉 SQL Joins:
+- Joins are used to combine rows from two or more tables based on a related column.
+- tables are mutually related using primary or foreign key.
+
+1. INNER JOIN/Equi join/ simple join:
+- Returns rows where there is a match in both tables.
+Ex:
+    SELECT e.name, d.department_name FROM employees e INNER JOIN departments d ON e.department_id = d.id;
+
+2. LEFT JOIN (LEFT OUTER JOIN):
+- Returns all rows from the left table, plus matched rows from the right table.
+- If no match, NULLs are returned for right table columns
+Ex:
+    SELECT e.name, d.department_name FROM employees e LEFT JOIN departments d ON e.department_id = d.id;
+
+3. RIGHT JOIN (RIGHT OUTER JOIN):
+- Returns all rows from the right table, plus matched rows from the left table.
+Ex:
+    SELECT e.name, d.department_name FROM employees e RIGHT JOIN departments d ON e.department_id = d.id;
+
+4. CROSS JOIN::
+- Returns the Cartesian product (all combinations of rows).
+Ex:
+    SELECT e.name, d.department_name FROM employees e CROSS JOIN departments d;
+
+5. FULL OUTER JOIN (Not directly supported in MySQL):
+- All rows from both tables
+- Emulated using UNION of LEFT JOIN and RIGHT JOIN.
+Ex:
+    SELECT e.name, d.department_name FROM employees e LEFT JOIN departments d ON e.department_id = d.id
+    UNION
+    SELECT e.name, d.department_name FROM employees e RIGHT JOIN departments d ON e.department_id = d.id;
+
+6. SELF JOIN:
+- A self join is when a table is joined with itself.
+- Useful for comparing rows within the same table.
+- You must use aliases to differentiate the two instances of the same table
+Ex:
+    SELECT e.name AS Employee, m.name AS Manager FROM employees e LEFT JOIN employees m ON e.manager_id = m.emp_id;
+
+
+
+
+

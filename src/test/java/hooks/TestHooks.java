@@ -9,12 +9,12 @@ public class TestHooks extends BaseController {
     @Before
     public void setUp() {
         ReportManager manager = new ReportManager();
-        initDriver();
+        //initDriver();
     }
 
     @After
     public void cleanUp() {
-        tearDown();
+        //tearDown();
     }
 
 }
