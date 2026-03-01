@@ -78,4 +78,4 @@ extent.reporter.spark.config=src/test/resources/spark-config.xml
 👉 Recruiter‑Ready Talking Point
 "I integrated Extent Reports with Cucumber using the ExtentCucumberAdapter plugin. This way, every scenario is
 automatically logged into a professional HTML report. I centralized system info in a ReportManager class,
-and customized styling via extent.propertiesl. This produces clean, reusable reports without extra code in step definitions.”
+and customized styling via extent.properties. This produces clean, reusable reports without extra code in step definitions.”

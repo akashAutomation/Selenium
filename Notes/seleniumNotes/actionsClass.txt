@@ -11,6 +11,7 @@
 - moveToElement(WebElement element) → Moves the mouse pointer to the element (hover).
 - dragAndDrop(source, target) → Drags an element from source to target.
 - sendKeys(Keys key) → Simulates keyboard key presses (e.g., Keys.ENTER, Keys.CONTROL).
+- scrollToElement(WebElement element) → Scrolls until the element is visible in the viewport.
 
 
 

@@ -1,0 +1,28 @@
+👉 SQL Set Operators
+1. UNION
+- Combines results from two queries.
+- Removes duplicates by default.
+Ex:
+    SELECT name FROM employees UNION SELECT name FROM managers;
+Result: Unique list of names from both tables.
+
+2. UNION ALL
+- Same as UNION, but keeps duplicates.
+Ex:
+    SELECT name FROM employees UNION ALL SELECT name FROM managers;
+Result: All names, including duplicates.
+
+3. INTERSECT ( Not supported in MySQL directly)
+- Returns rows common to both queries.
+- MySQL workaround: use INNER JOIN or IN.
+Ex:
+    SELECT name FROM employees WHERE name IN (SELECT name FROM managers);
+
+4. EXCEPT / MINUS (Not supported in MySQL directly)
+- Returns rows from the first query that are not in the second.
+- MySQL workaround: use LEFT JOIN with NULL check or NOT IN.
+Ex:
+    SELECT name FROM employees WHERE name NOT IN (SELECT name FROM managers);
+
+Notes:
+- All queries combined with set operators must have the same number of columns and compatible data types.

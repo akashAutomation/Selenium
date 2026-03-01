@@ -50,7 +50,7 @@ Logical Operators(AND/OR/NOT):
 Between/In operators: - BETWEEN 90 AND 100 means marks ≥ 90 and marks ≤ 100
     SELECT * from student WHERE marks BETWEEN 90 AND 100; // include 90 and 100 as well
     SELECT * from student WHERE marks NOT BETWEEN 90 AND 100;
-    SELECT * from student WHERE marks IN(90,100); //checks if marks equal to 90, 100 then display those record only
+    SELECT * from student WHERE marks IN(90,100); //checks if marks equal to 90 OR 100 then display those record only
     SELECT * from student WHERE marks NOT IN(90,100); //checks if marks not equal to 90, 100 then display those record only
 
 Pattern Matching operators(Wild card operators):
@@ -173,74 +173,16 @@ Notes:
 Ex:
     SELECT name, salary FROM employees ORDER BY salary ASC;
 
-👉 SQL Set Operators
-1. UNION
-- Combines results from two queries.
-- Removes duplicates by default.
-Ex:
-    SELECT name FROM employees UNION SELECT name FROM managers;
-Result: Unique list of names from both tables.
+👉 Execution Order vs. Writing Order
+- Writing order: SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT
+- Execution order (how the database actually processes): FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
 
-2. UNION ALL
-- Same as UNION, but keeps duplicates.
-Ex:
-    SELECT name FROM employees UNION ALL SELECT name FROM managers;
-Result: All names, including duplicates.
 
-3. INTERSECT ( Not supported in MySQL directly)
-- Returns rows common to both queries.
-- MySQL workaround: use INNER JOIN or IN.
-Ex:
-    SELECT name FROM employees WHERE name IN (SELECT name FROM managers);
 
-4. EXCEPT / MINUS (Not supported in MySQL directly)
-- Returns rows from the first query that are not in the second.
-- MySQL workaround: use LEFT JOIN with NULL check or NOT IN.
-Ex:
-    SELECT name FROM employees WHERE name NOT IN (SELECT name FROM managers);
 
-Notes:
-- All queries combined with set operators must have the same number of columns and compatible data types.
 
-👉 SQL Joins:
-- Joins are used to combine rows from two or more tables based on a related column.
-- tables are mutually related using primary or foreign key.
 
-1. INNER JOIN/Equi join/ simple join:
-- Returns rows where there is a match in both tables.
-Ex:
-    SELECT e.name, d.department_name FROM employees e INNER JOIN departments d ON e.department_id = d.id;
 
-2. LEFT JOIN (LEFT OUTER JOIN):
-- Returns all rows from the left table, plus matched rows from the right table.
-- If no match, NULLs are returned for right table columns
-Ex:
-    SELECT e.name, d.department_name FROM employees e LEFT JOIN departments d ON e.department_id = d.id;
-
-3. RIGHT JOIN (RIGHT OUTER JOIN):
-- Returns all rows from the right table, plus matched rows from the left table.
-Ex:
-    SELECT e.name, d.department_name FROM employees e RIGHT JOIN departments d ON e.department_id = d.id;
-
-4. CROSS JOIN::
-- Returns the Cartesian product (all combinations of rows).
-Ex:
-    SELECT e.name, d.department_name FROM employees e CROSS JOIN departments d;
-
-5. FULL OUTER JOIN (Not directly supported in MySQL):
-- All rows from both tables
-- Emulated using UNION of LEFT JOIN and RIGHT JOIN.
-Ex:
-    SELECT e.name, d.department_name FROM employees e LEFT JOIN departments d ON e.department_id = d.id
-    UNION
-    SELECT e.name, d.department_name FROM employees e RIGHT JOIN departments d ON e.department_id = d.id;
-
-6. SELF JOIN:
-- A self join is when a table is joined with itself.
-- Useful for comparing rows within the same table.
-- You must use aliases to differentiate the two instances of the same table
-Ex:
-    SELECT e.name AS Employee, m.name AS Manager FROM employees e LEFT JOIN employees m ON e.manager_id = m.emp_id;
 
 
 

@@ -54,5 +54,6 @@ Here’s how a typical Selenium WebDriver test executes:
     - Your test script processes the result and continues with the next command.
 
 👉 Page Object Model (POM):
-The Page Object Model (POM) is a design pattern in Selenium test automation that promotes modularity,
-maintainability, and reusability by separating the page structure (UI elements) from the test logic.
+- The Page Object Model (POM) is a design pattern in Selenium test automation that promotes modularity,
+  maintainability, and reusability by separating the page structure (UI elements) from the test logic.
+- A design pattern where each web page is represented as a class, and its elements are defined as variables

@@ -5,4 +5,8 @@
 - driver.switchTo().newWindow(WindowType.TAB) --> opens a new tab in current focused window
 - driver.switchTo().newWindow(WindowType.WINDOW) --> opens a new window
 - driver.switchTo().alert() --> switch to alerts
-
+- driver.get()  --> it just loads the page
+- driver.navigate().to() --> does the same thing but is part of the navigation interface, which also lets you go back, forward, or refresh.
+- driver.navigate().back(); --> navigate back
+- driver.navigate().forward(); --> navigate forward
+- driver.navigate().refresh(); --> referesh page

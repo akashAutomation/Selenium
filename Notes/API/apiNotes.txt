@@ -124,14 +124,17 @@ Code Range | Category        | Meaning
 204   No Content            → Request succeeded but no body returned (often after DELETE)
 301   Moved Permanently     → Resource moved to a new URL
 302   Found                 → Temporary redirect
-400   Bad Request           → Invalid request (syntax or parameters)
-401   Unauthorized          → Authentication required or failed
-403   Forbidden             → You don’t have permission
+400   Bad Request           → Invalid request (ex: invalid syntax, missing fields, or bad formatting)
+401   Unauthorized          → Authentication required or failed (ex: Missing/invalid authentication)
+403   Forbidden             → You don’t have permission (ex: Client is authenticated but not allowed to access the resource)
 404   Not Found             → Requested resource could not be found. Resource or route doesn’t exist
-409   Conflict              → Request conflicts with current state (e.g., duplicate record)
+405   method not allowed    → HTTP method not supported(ex: Using POST instead of GET)
+409   Conflict              → Request conflicts with current state (ex: duplicate record or Trying to create a record that already exists in database)
+429   Too Many Requests     → Rate limit exceeded/API throttling (ex: you’re calling a API that allows only 100 requests per minute. If your client sends 150 requests in that minute, the server will reject the excess requests with 429 error)
 500   Internal Server Error → Generic server-side failure
 502   Bad Gateway           → Invalid response from upstream server
 503   Service Unavailable   → Server temporarily overloaded or down
+504   Gateway timeout       → Upstream server timeout(Slow backend)
 
 👉 What is cURL?
 - cURL stands for Client URL.
@@ -191,7 +194,7 @@ Types of Endpoints
         .statusCode(200);
 
 3. Token-Based Authentication (JWT)
- - How it works: Server issues a signed token (JSON Web Token) after login. Client sends token in headers for subsequent requests.
+ - How it works: Client sends credentials (username, password) to the server, Server verifies and generates a JWT(JSON Web Token) after login. Client sends token in headers for subsequent requests.
  - Pros: Stateless, scalable, secure if implemented correctly.
  - Cons: Token theft can compromise security; requires careful expiry/refresh handling.
  - Use Case: Modern web/mobile apps, microservices.

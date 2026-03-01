@@ -1,0 +1,12 @@
+- git clone <repo_url> → Clone an existing repository
+- git add . → Stage all changes
+- git commit -m "Commit message" → Commit staged changes
+- git push origin <branch_name> → Push changes to remote
+- git pull origin <branch_name> → Pull changes from remote
+- git branch → List branches
+- git branch <branch_name> → Create new branch
+- git checkout <branch_name> → Switch to branch
+- git checkout -b <branch_name> → Create + switch to new branch
+- git log → Show commit history
+- git init → Initialize a new Git repository
+- git remote add origin <repo_url> → Link local repo to remote
